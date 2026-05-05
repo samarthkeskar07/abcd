@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Best of Luck - DBMS Practicals</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0d1117;
+      color: #c9d1d9;
+      padding: 20px;
+      height: 100vh;
+      overflow: hidden;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body.light {
+      background: #ffffff;
+      color: #24292f;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid #30363d;
+    }
+
+    body.light .header {
+      border-bottom-color: #d0d7de;
+    }
+
+    .header h1 {
+      font-size: 28px;
+      font-weight: 600;
+      color: #c9d1d9;
+    }
+
+    body.light .header h1 {
+      color: #24292f;
+    }
+
+    .theme-toggle {
+      background: #21262d;
+      border: 1px solid #30363d;
+      color: #c9d1d9;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+
+    .theme-toggle:hover {
+      background: #30363d;
+    }
+
+    body.light .theme-toggle {
+      background: #f6f8fa;
+      border-color: #d0d7de;
+      color: #24292f;
+    }
+
+    body.light .theme-toggle:hover {
+      background: #e1e4e8;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      height: calc(100vh - 110px);
+    }
+
+    .row {
+      display: flex;
+      gap: 14px;
+      /* Keep cards on a single line but allow them to shrink to fit the viewport (no horizontal scroll on rows) */
+      flex-wrap: nowrap;
+      align-items: flex-start;
+      width: 100%;
+      padding-bottom: 6px;
+      overflow: visible; /* ensure the row itself doesn't force scrolling */
+    }
+
+    .card {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      padding: 14px;
+      height: 300px;
+      /* Allow cards to grow/shrink so the whole row fits the viewport without scrolling */
+      flex: 1 1 calc(20% - 14px);
+      min-width: 0; /* important so children can shrink and avoid overflow */
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.3s;
+      box-sizing: border-box;
+    }
+
+    .card:hover {
+      border-color: #58a6ff;
+    }
+
+    body.light .card {
+      background: #f6f8fa;
+      border-color: #d0d7de;
+    }
+
+    body.light .card:hover {
+      border-color: #0969da;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .card-title {
+      font-weight: 600;
+      font-size: 14px;
+      color: #c9d1d9;
+    }
+
+    body.light .card-title {
+      color: #24292f;
+    }
+
+    .copy-btn {
+      background: #238636;
+      border: none;
+      color: #ffffff;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: background 0.3s;
+    }
+
+    .copy-btn:hover {
+      background: #2ea043;
+    }
+
+    .copy-btn.copied {
+      background: #1f6feb;
+    }
+
+    body.light .copy-btn {
+      background: #1a7f37;
+    }
+
+    body.light .copy-btn:hover {
+      background: #2da44e;
+    }
+
+    body.light .copy-btn.copied {
+      background: #0969da;
+    }
+
+    .code-container {
+      flex: 1;
+      overflow-y: auto;
+      /* Allow horizontal scrolling only inside the code block for long lines */
+      overflow-x: auto;
+      white-space: pre; /* keep long lines on one line so horizontal scroll will activate */
+      background: #000000;
+      padding: 10px;
+      border-radius: 6px;
+    }
+
+    /* Keep the code container black in both themes for requested look, but keep the light-theme border for separation */
+    body.light .code-container {
+      background: #000000;
+      border: 1px solid #d0d7de;
+    }
+
+    .code-container::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+
+    .code-container::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .code-container::-webkit-scrollbar-thumb {
+      background: #30363d;
+      border-radius: 2px;
+    }
+
+    body.light .code-container::-webkit-scrollbar-thumb {
+      background: #d0d7de;
+    }
+
+    pre {
+      margin: 0;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 12px;
+      line-height: 1.5;
+      color: #c9d1d9;
+      white-space: pre;
+    }
+
+    /* Force pre text to remain high-contrast on black code background */
+    body.light pre {
+      color: #c9d1d9;
+    }
+
+    /* Specific sizing: first row = 5-per-row (20%), second row = 4-per-row (25%) */
+    #row1 .card { flex: 0 0 calc(20% - 14px); }
+    #row2 .card { flex: 0 0 calc(25% - 14px); }
+
+    .line {
+      display: block;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+
+    .line.has-keyword {
+      background: linear-gradient(90deg, rgba(88,166,255,0.08), transparent);
+      border-left: 2px solid rgba(88,166,255,0.3);
+    }
+
+    body.light .line.has-keyword {
+      background: linear-gradient(90deg, rgba(9,105,218,0.08), transparent);
+      border-left: 2px solid rgba(9,105,218,0.3);
+    }
+
+    .keyword { color: #ff7b72; font-weight: 600; }
+    .type { color: #ffa657; }
+    .string { color: #a5d6ff; }
+    .comment { color: #8b949e; }
+    .number { color: #79c0ff; }
+
+    body.light .keyword { color: #cf222e; font-weight: 600; }
+    body.light .type { color: #953800; }
+    body.light .string { color: #0a3069; }
+    body.light .comment { color: #6e7781; }
+    body.light .number { color: #0550ae; }
+
+    /* Mobile view: 2 cards per row with vertical scroll */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: row;
+        gap: 14px;
+        overflow-x: auto;
+      }
+
+      .row {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        min-width: calc(50% - 7px);
+        flex-shrink: 0;
+        align-items: stretch;
+      }
+
+      .card {
+        flex: 1;
+        min-height: 250px;
+      }
+    }
+
+            
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Best of Luck - DBMS Practicals</h1>
+    <button class="theme-toggle" onclick="toggleTheme()">Light</button>
+  </div>
+
+  <div class="container">
+    <div class="row" id="row1"></div>
+    <div class="row" id="row2"></div>
+  </div>
+
+  <script>
+    const programs = [
+      {
+        title: "Practical No : 1",
+        code: `-- 1) CREATE TABLES
+
+CREATE TABLE Person (
+    driver_id INT PRIMARY KEY,
+    name VARCHAR(50),
+    address VARCHAR(100)
+); -- Creates Person table with primary key
+
+CREATE TABLE Car (
+    license VARCHAR(20) PRIMARY KEY,
+    model VARCHAR(50),
+    year INT
+); -- Creates Car table with license as primary key
+
+CREATE TABLE Accident (
+    report_no INT PRIMARY KEY,
+    date_acc DATE,
+    location VARCHAR(100)
+); -- Creates Accident table
+
+CREATE TABLE Owns (
+    driver_id INT,
+    license VARCHAR(20),
+    PRIMARY KEY (driver_id, license)
+); -- Creates Owns relationship table
+
+CREATE TABLE Participated (
+    driver_id INT,
+    model VARCHAR(50),
+    report_no INT,
+    damage_amount DECIMAL(10,2),
+    PRIMARY KEY (driver_id, report_no)
+); -- Creates Participated table
+
+
+-- EMPLOYEE DATABASE TABLES
+
+CREATE TABLE Employee (
+    employee_name VARCHAR(50) PRIMARY KEY,
+    street VARCHAR(100),
+    city VARCHAR(50)
+); -- Creates Employee table
+
+CREATE TABLE Works (
+    employee_name VARCHAR(50),
+    company_name VARCHAR(50),
+    salary DECIMAL(10,2),
+    PRIMARY KEY (employee_name, company_name)
+); -- Creates Works table
+
+CREATE TABLE Company (
+    company_name VARCHAR(50) PRIMARY KEY,
+    city VARCHAR(50)
+); -- Creates Company table
+
+CREATE TABLE Manages (
+    employee_name VARCHAR(50),
+    manager_name VARCHAR(50),
+    PRIMARY KEY (employee_name)
+); -- Creates Manages table
+
+
+-- 2) CREATE VIEW
+
+CREATE VIEW emp_company_view AS
+SELECT e.employee_name, w.company_name
+FROM Employee e
+JOIN Works w ON e.employee_name = w.employee_name;
+-- Creates view showing employee and company
+
+
+-- 3) CREATE INDEX
+
+CREATE INDEX emp_index 
+ON Employee(employee_name);
+-- Creates index on Employee table
+
+CREATE INDEX part_index 
+ON Participated(driver_id);
+-- Creates index on Participated table
+
+
+-- 4) CREATE SEQUENCE + INSERT
+
+CREATE SEQUENCE person_seq
+START WITH 1
+INCREMENT BY 1;
+-- Creates sequence for auto-generating driver_id
+
+INSERT INTO Person VALUES (person_seq.NEXTVAL, 'Rohit', 'Pune');
+INSERT INTO Person VALUES (person_seq.NEXTVAL, 'Amit', 'Mumbai');
+INSERT INTO Person VALUES (person_seq.NEXTVAL, 'Raj', 'Delhi');
+INSERT INTO Person VALUES (person_seq.NEXTVAL, 'Neha', 'Nashik');
+-- Inserts 4 records using sequence
+
+
+-- 5) CREATE SYNONYM
+
+CREATE SYNONYM part_syn FOR Participated;
+-- Creates synonym for Participated table
+
+CREATE SYNONYM comp_syn FOR Company;
+-- Creates synonym for Company table
+
+
+-- DISPLAY USING SYNONYM
+
+SELECT * FROM part_syn;
+-- Displays records from Participated using synonym
+
+SELECT * FROM comp_syn;
+-- Displays records from Company using synonym
+
+
+-- UPDATE USING SYNONYM
+
+UPDATE part_syn
+SET damage_amount = 5000
+WHERE driver_id = 1;
+-- Updates Participated table using synonym
+
+UPDATE comp_syn
+SET city = 'Pune'
+WHERE company_name = 'TCS';
+-- Updates Company table using synonym
+        title: "Practical No : 2",
+        code: `salary=[49000,64000,81000,100000,121000,144000,169000,196000]
+def selectionsort(salarylist):
+    n=len(salarylist)
+    for i in range(n):
+        minindex=i
+        for j in range(i+1,n):
+            if salarylist[j]<salarylist[minindex]:
+                minindex=j
+        salarylist[i],salarylist[minindex]=salarylist[minindex],salarylist[i]
+    return salarylist
+def bubblesort(salarylist):
+    n=len(salarylist)
+    for i in range(n):
+        for j in range(0,n-i-1):
+            if salarylist[j]>salarylist[j+1]:
+                salarylist[j],salarylist[j+1]=salarylist[j+1],salarylist[j]
+    return salarylist
+sortedsalaryselection = selectionsort(salary.copy())
+print("top 5 salary (selection sort):",sortedsalaryselection[ -5:][::-1])
+sortedsalarybubble = bubblesort(salary.copy())
+print("top 5 salary (bubble sort):",sortedsalarybubble[-5:][::-1])`
+      },
+      {
+        title: "Practical No : 3",
+        code: `EXP 03
+
+-- =========================
+-- 1) CREATE TABLES WITH CONSTRAINTS
+-- =========================
+
+CREATE TABLE Employee (
+    employee_name VARCHAR(50) PRIMARY KEY,
+    street VARCHAR(100) NOT NULL,
+    city VARCHAR(50) NOT NULL
+); -- Creates Employee table with primary key and NOT NULL
+
+CREATE TABLE Company (
+    company_name VARCHAR(50) PRIMARY KEY,
+    city VARCHAR(50) NOT NULL
+); -- Creates Company table
+
+CREATE TABLE Works (
+    employee_name VARCHAR(50),
+    company_name VARCHAR(50),
+    salary DECIMAL(10,2) CHECK (salary > 0),
+    PRIMARY KEY (employee_name, company_name),
+    FOREIGN KEY (employee_name) REFERENCES Employee(employee_name),
+    FOREIGN KEY (company_name) REFERENCES Company(company_name)
+); -- Creates Works table with FK and salary constraint
+
+CREATE TABLE Manages (
+    employee_name VARCHAR(50),
+    manager_name VARCHAR(50),
+    PRIMARY KEY (employee_name),
+    FOREIGN KEY (employee_name) REFERENCES Employee(employee_name)
+); -- Creates Manages table
+
+
+-- =========================
+-- SAMPLE VIEW (FOR REQUIREMENT)
+-- =========================
+
+CREATE VIEW emp_company_view AS
+SELECT e.employee_name, w.company_name, w.salary
+FROM Employee e
+JOIN Works w ON e.employee_name = w.employee_name;
+-- Creates view combining employee and company
+
+
+-- =========================
+-- 2) SQL QUERIES (JOIN, SUBQUERY, VIEW)
+-- =========================
+
+-- 1) Employees working for First Bank Corporation
+SELECT e.employee_name
+FROM Employee e
+JOIN Works w ON e.employee_name = w.employee_name
+WHERE w.company_name = 'First Bank Corporation';
+-- Uses JOIN to filter employees
+
+-- 2) Names and cities of employees working for First Bank Corporation
+SELECT e.employee_name, e.city
+FROM Employee e
+JOIN Works w ON e.employee_name = w.employee_name
+WHERE w.company_name = 'First Bank Corporation';
+-- JOIN with projection
+
+-- 3) Employees working for First Bank Corporation earning > 10000
+SELECT e.employee_name, e.street, e.city
+FROM Employee e
+JOIN Works w ON e.employee_name = w.employee_name
+WHERE w.company_name = 'First Bank Corporation'
+AND w.salary > 10000;
+-- JOIN with condition
+
+-- 4) Employees earning more than each employee of Small Bank Corporation
+SELECT employee_name
+FROM Works
+WHERE salary > ALL (
+    SELECT salary 
+    FROM Works 
+    WHERE company_name = 'Small Bank Corporation'
+);
+-- Subquery with ALL operator
+
+-- 5) Employees earning more than average salary of their company
+SELECT w.employee_name
+FROM Works w
+WHERE w.salary > (
+    SELECT AVG(salary)
+    FROM Works
+    WHERE company_name = w.company_name
+);
+-- Correlated subquery
+
+-- 6) Company with smallest payroll
+SELECT company_name
+FROM Works
+GROUP BY company_name
+HAVING SUM(salary) <= ALL (
+    SELECT SUM(salary)
+    FROM Works
+    GROUP BY company_name
+);
+-- Aggregation + subquery
+
+-- 7) Companies with avg salary higher than First Bank Corporation
+SELECT company_name
+FROM Works
+GROUP BY company_name
+HAVING AVG(salary) > (
+    SELECT AVG(salary)
+    FROM Works
+    WHERE company_name = 'First Bank Corporation'
+);
+-- Subquery with GROUP BY
+
+-- 8) Give 10% raise to First Bank Corporation employees
+UPDATE Works
+SET salary = salary * 1.10
+WHERE company_name = 'First Bank Corporation';
+-- UPDATE with condition
+
+-- 9) Insert high earners into new table
+CREATE TABLE HighEarners (
+    employee_name VARCHAR(50),
+    salary DECIMAL(10,2)
+); -- Creates HighEarners table
+
+INSERT INTO HighEarners
+SELECT employee_name, salary
+FROM Works
+WHERE salary > (SELECT AVG(salary) FROM Works);
+-- INSERT using subquery
+
+-- 10) Delete employees working in companies located in Gotham
+DELETE FROM Employee
+WHERE employee_name IN (
+    SELECT w.employee_name
+    FROM Works w
+    JOIN Company c ON w.company_name = c.company_name
+    WHERE c.city = 'Gotham'
+);
+-- DELETE using JOIN in subquery
+      {
+        title: "Practical No : 4",
+        code: `EXP 04 NEW
+
+SET SERVEROUTPUT ON;
+
+CREATE TABLE Borrower (
+    Rollin NUMBER PRIMARY KEY,
+    Name VARCHAR2(50),
+    DateofIssue DATE,
+    NameofBook VARCHAR2(50),
+    Status VARCHAR2(1)
+);
+
+CREATE TABLE Fine (
+    Roll_no NUMBER,
+    Datee DATE,
+    Amt NUMBER
+);
+
+INSERT INTO Borrower 
+VALUES (1, 'Amit', DATE '2026-04-01', 'DBMS', 'I');
+
+INSERT INTO Borrower 
+VALUES (2, 'Ravi', DATE '2026-04-10', 'Python', 'I');
+
+
+DECLARE
+
+    v_rollno Borrower.Rollin%TYPE;
+    v_book Borrower.NameofBook%TYPE;
+    v_date Borrower.DateofIssue%TYPE;
+
+    v_days NUMBER;
+    v_fine NUMBER := 0;
+
+BEGIN
+
+    v_rollno := &Roll_Number;
+    v_book := '&Book_Name';
+
+    SELECT DateofIssue 
+    INTO v_date
+    FROM Borrower
+    WHERE Rollin = v_rollno
+    AND NameofBook = v_book;
+
+    v_days := SYSDATE - v_date;
+
+    IF v_days BETWEEN 15 AND 30 THEN
+        v_fine := v_days * 5;
+    ELSIF v_days > 30 THEN
+        v_fine := v_days * 50;
+    ELSE
+        v_fine := 0;
+    END IF;
+
+    IF v_fine > 0 THEN
+        INSERT INTO Fine 
+        VALUES (v_rollno, SYSDATE, v_fine);
+    END IF;
+
+    UPDATE Borrower
+    SET Status = 'R'
+    WHERE Rollin = v_rollno
+    AND NameofBook = v_book;
+
+    DBMS_OUTPUT.PUT_LINE('Book Returned Successfully');
+    DBMS_OUTPUT.PUT_LINE('Number of Days = ' || v_days);
+    DBMS_OUTPUT.PUT_LINE('Fine Amount = ' || v_fine);
+
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('Record Not Found');
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Error Occurred');
+END;
+/
+      {
+        title: "Practical No : 5",
+        code: `EXP 05 NEW 
+
+-- =========================
+-- PROBLEM STATEMENT (MAIN)
+-- =========================
+-- Write a PL/SQL block using parameterized cursor to merge records 
+-- from N_RollCall into O_RollCall. If record already exists, skip it.
+
+
+-- =========================
+-- TABLE CREATION
+-- =========================
+
+CREATE TABLE O_RollCall (
+    Rollno NUMBER PRIMARY KEY,
+    Name VARCHAR2(50)
+);
+
+CREATE TABLE N_RollCall (
+    Rollno NUMBER,
+    Name VARCHAR2(50)
+);
+
+
+-- =========================
+-- SAMPLE DATA
+-- =========================
+
+INSERT INTO O_RollCall VALUES (1, 'Amit');
+INSERT INTO O_RollCall VALUES (2, 'Ravi');
+
+INSERT INTO N_RollCall VALUES (2, 'Ravi');
+INSERT INTO N_RollCall VALUES (3, 'Neha');
+INSERT INTO N_RollCall VALUES (4, 'Pooja');
+
+
+-- =========================
+-- PARAMETERIZED CURSOR
+-- =========================
+
+SET SERVEROUTPUT ON;
+
+DECLARE
+
+    CURSOR c1 IS 
+        SELECT Rollno, Name FROM N_RollCall;
+
+    CURSOR c2 (p_roll NUMBER) IS
+        SELECT Rollno FROM O_RollCall WHERE Rollno = p_roll;
+
+    v_roll NUMBER;
+    v_name VARCHAR2(50);
+    v_temp NUMBER;
+
+BEGIN
+
+    OPEN c1;
+
+    LOOP
+        FETCH c1 INTO v_roll, v_name;
+        EXIT WHEN c1%NOTFOUND;
+
+        OPEN c2(v_roll);
+        FETCH c2 INTO v_temp;
+
+        IF c2%NOTFOUND THEN
+            INSERT INTO O_RollCall VALUES (v_roll, v_name);
+            DBMS_OUTPUT.PUT_LINE('Inserted: ' || v_roll);
+        ELSE
+            DBMS_OUTPUT.PUT_LINE('Skipped: ' || v_roll);
+        END IF;
+
+        CLOSE c2;
+
+    END LOOP;
+
+    CLOSE c1;
+
+END;
+/
+      {
+        title: "Practical No : 6",
+        code: EXP 06 NEW 
+
+-- =========================
+-- PROBLEM STATEMENT (STORED PROCEDURE)
+-- =========================
+-- Write a stored procedure proc_Grade to categorize students based on total marks 
+-- and store the result in Result table.
+
+
+-- =========================
+-- TABLE CREATION
+-- =========================
+
+CREATE TABLE Stud_Marks (
+    Roll NUMBER PRIMARY KEY,
+    Name VARCHAR2(50),
+    Total_marks NUMBER
+);
+
+CREATE TABLE Result (
+    Roll NUMBER,
+    Name VARCHAR2(50),
+    Class VARCHAR2(50)
+);
+
+
+-- =========================
+-- SAMPLE DATA
+-- =========================
+
+INSERT INTO Stud_Marks VALUES (1, 'Amit', 1200);
+INSERT INTO Stud_Marks VALUES (2, 'Ravi', 950);
+INSERT INTO Stud_Marks VALUES (3, 'Neha', 870);
+INSERT INTO Stud_Marks VALUES (4, 'Pooja', 800);
+
+
+-- =========================
+-- STORED PROCEDURE
+-- =========================
+
+CREATE OR REPLACE PROCEDURE proc_Grade IS
+
+    CURSOR c1 IS SELECT Roll, Name, Total_marks FROM Stud_Marks;
+
+    v_roll Stud_Marks.Roll%TYPE;
+    v_name Stud_Marks.Name%TYPE;
+    v_marks Stud_Marks.Total_marks%TYPE;
+    v_class VARCHAR2(50);
+
+BEGIN
+
+    OPEN c1;
+
+    LOOP
+        FETCH c1 INTO v_roll, v_name, v_marks;
+        EXIT WHEN c1%NOTFOUND;
+
+        IF v_marks BETWEEN 990 AND 1500 THEN
+            v_class := 'Distinction';
+
+        ELSIF v_marks BETWEEN 900 AND 989 THEN
+            v_class := 'First Class';
+
+        ELSIF v_marks BETWEEN 825 AND 899 THEN
+            v_class := 'Higher Second Class';
+
+        ELSE
+            v_class := 'Fail';
+        END IF;
+
+        INSERT INTO Result VALUES (v_roll, v_name, v_class);
+
+    END LOOP;
+
+    CLOSE c1;
+
+END;
+/
+
+-- =========================
+-- CALL THE PROCEDURE (IMPORTANT)
+-- =========================
+
+BEGIN
+    proc_Grade;
+END;
+/
+
+-- =========================
+-- DISPLAY OUTPUT
+-- =========================
+
+SELECT * FROM Result; {
+        title: "Practical No : 7",
+        code: `EXP 07 NEW
+
+-- =========================
+-- PROBLEM STATEMENT (MAIN)
+-- =========================
+-- Write database trigger on Library table to track UPDATE and DELETE operations.
+-- Store old values in Library_Audit table.
+
+
+-- =========================
+-- TABLE CREATION
+-- =========================
+
+CREATE TABLE Library (
+    Book_id NUMBER PRIMARY KEY,
+    Book_name VARCHAR2(50),
+    Author VARCHAR2(50),
+    Price NUMBER
+);
+
+CREATE TABLE Library_Audit (
+    Book_id NUMBER,
+    Book_name VARCHAR2(50),
+    Author VARCHAR2(50),
+    Price NUMBER,
+    Operation VARCHAR2(10),
+    Change_Date DATE
+);
+
+
+-- =========================
+-- SAMPLE DATA
+-- =========================
+
+INSERT INTO Library VALUES (1, 'DBMS', 'Korth', 500);
+INSERT INTO Library VALUES (2, 'Python', 'Guido', 600);
+
+COMMIT;
+
+
+-- =========================
+-- TRIGGER (FIXED VERSION)
+-- =========================
+
+CREATE OR REPLACE TRIGGER trg_library_audit
+BEFORE UPDATE OR DELETE ON Library
+FOR EACH ROW
+
+DECLARE
+    v_operation VARCHAR2(10);
+
+BEGIN
+
+    IF UPDATING THEN
+        v_operation := 'UPDATE';
+    ELSIF DELETING THEN
+        v_operation := 'DELETE';
+    END IF;
+
+    INSERT INTO Library_Audit
+    VALUES (:OLD.Book_id, :OLD.Book_name, :OLD.Author, :OLD.Price,
+            v_operation, SYSDATE);
+
+END;
+/
+    
+
+-- =========================
+-- OPERATIONS (TO FIRE TRIGGER)
+-- =========================
+
+-- Update (fires trigger)
+UPDATE Library 
+SET Price = 700 
+WHERE Book_id = 1;
+
+-- Delete (fires trigger)
+DELETE FROM Library 
+WHERE Book_id = 2;
+
+COMMIT;
+
+
+-- =========================
+-- DISPLAY OUTPUT
+-- =========================
+
+SELECT * FROM Library_Audit;
+    function escHtml(s) {
+      return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    const keywords = /\b(CREATE|TABLE|PRIMARY|KEY|VARCHAR2|NUMBER|INSERT|INTO|VALUES|SELECT|FROM|WHERE|UPDATE|DELETE|SET|OR|REPLACE|TRIGGER|AFTER|ON|FOR|EACH|ROW|BEGIN|END|PROCEDURE|CURSOR|OPEN|LOOP|FETCH|EXIT|WHEN|CLOSE|FOREIGN|REFERENCES|JOIN|INNER|LEFT|RIGHT|VIEW|INDEX|SEQUENCE|SYNONYM|ALTER|ADD|MODIFY|DROP|COLUMN|RENAME|TRUNCATE|NOT|NULL|UNIQUE|CHECK|CONSTRAINT|IN|AS|IS|START|WITH|INCREMENT|BY)\b/g;
+    const types = /\b(Employee|Department|Emp_Log|Emp_View|Emp_Dept_View|Emp|DBMS_OUTPUT|AVG|MAX)\b/g;
+    const strRe = /("[^"]*"|'[^']*')/g;
+    const commentRe = /(\/\/.*$)/gm;
+    const numberRe = /\b(\d+)\b/g;
+
+    function highlightLine(line) {
+      let html = escHtml(line);
+      html = html.replace(commentRe, '<span class="comment">$1</span>');
+      html = html.replace(strRe, '<span class="string">$1</span>');
+      html = html.replace(keywords, '<span class="keyword">$1</span>');
+      html = html.replace(types, '<span class="type">$1</span>');
+      html = html.replace(numberRe, '<span class="number">$1</span>');
+      return html;
+    }
+
+    function makeLines(code) {
+      const lines = code.split('\n');
+      return lines.map(l => {
+        const has = keywords.test(l) || types.test(l);
+        keywords.lastIndex = 0;
+        types.lastIndex = 0;
+        return `<div class="line${has ? ' has-keyword' : ''}">${highlightLine(l) || ' '}</div>`;
+      }).join('');
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle('light');
+      const btn = document.querySelector('.theme-toggle');
+      btn.textContent = document.body.classList.contains('light') ? 'Dark' : 'Light';
+    }
+
+    function copyCode(raw, btn) {
+      navigator.clipboard.writeText(raw).then(() => {
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'Copy';
+          btn.classList.remove('copied');
+        }, 1200);
+      });
+    }
+
+    const row1 = document.getElementById('row1');
+    const row2 = document.getElementById('row2');
+
+    programs.forEach((p, i) => {
+      const card = document.createElement('div');
+      card.className = 'card';
+
+      const header = document.createElement('div');
+      header.className = 'card-header';
+
+      const title = document.createElement('div');
+      title.className = 'card-title';
+      title.textContent = p.title;
+
+      const btn = document.createElement('button');
+      btn.className = 'copy-btn';
+      btn.textContent = 'Copy';
+      btn.addEventListener('click', () => copyCode(p.code, btn));
+
+      header.appendChild(title);
+      header.appendChild(btn);
+
+      const codeWrap = document.createElement('div');
+      codeWrap.className = 'code-container';
+      codeWrap.innerHTML = '<pre>' + makeLines(p.code) + '</pre>';
+
+      card.appendChild(header);
+      card.appendChild(codeWrap);
+
+      if (i < 5) row1.appendChild(card);
+      else row2.appendChild(card);
+    });
+  </script>
+</body>
+</html>
