@@ -409,28 +409,117 @@ WHERE company_name = 'TCS';
       },
       {
         title: "Practical No : 2",
-        code: `salary=[49000,64000,81000,100000,121000,144000,169000,196000]
-def selectionsort(salarylist):
-    n=len(salarylist)
-    for i in range(n):
-        minindex=i
-        for j in range(i+1,n):
-            if salarylist[j]<salarylist[minindex]:
-                minindex=j
-        salarylist[i],salarylist[minindex]=salarylist[minindex],salarylist[i]
-    return salarylist
-def bubblesort(salarylist):
-    n=len(salarylist)
-    for i in range(n):
-        for j in range(0,n-i-1):
-            if salarylist[j]>salarylist[j+1]:
-                salarylist[j],salarylist[j+1]=salarylist[j+1],salarylist[j]
-    return salarylist
-sortedsalaryselection = selectionsort(salary.copy())
-print("top 5 salary (selection sort):",sortedsalaryselection[ -5:][::-1])
-sortedsalarybubble = bubblesort(salary.copy())
-print("top 5 salary (bubble sort):",sortedsalarybubble[-5:][::-1])`
-      },
+        code: `EXP 02
+
+-- =========================
+-- 1) CREATE TABLE DEPARTMENT
+-- =========================
+
+CREATE TABLE Department (
+    Deptno INT PRIMARY KEY,
+    Dname VARCHAR(50) NOT NULL,
+    Location VARCHAR(50)
+); -- Creates Department table with constraints
+
+INSERT INTO Department VALUES (10, 'Accounting', 'Mumbai');
+INSERT INTO Department VALUES (20, 'Research', 'Pune');
+INSERT INTO Department VALUES (30, 'Sales', 'Nashik');
+INSERT INTO Department VALUES (40, 'Operations', 'Nagpur');
+-- Inserts department records
+
+
+-- =========================
+-- 2) CREATE TABLE EMPLOYEE
+-- =========================
+
+CREATE TABLE Employee (
+    Empno INT PRIMARY KEY,
+    Ename VARCHAR(50) NOT NULL,
+    Job VARCHAR(50),
+    Mgr INT,
+    Joined_date DATE,
+    Salary DECIMAL(10,2),
+    Commission DECIMAL(10,2),
+    Deptno INT,
+    Address VARCHAR(50),
+    FOREIGN KEY (Deptno) REFERENCES Department(Deptno)
+); -- Creates Employee table with foreign key
+
+INSERT INTO Employee VALUES (1001, 'Nilesh joshi', 'Clerk', 1005, '1995-12-17', 2800, 600, 20, 'Nashik');
+INSERT INTO Employee VALUES (1002, 'Avinash pawar', 'Salesman', 1003, '1996-02-20', 5000, 1200, 30, 'Nagpur');
+INSERT INTO Employee VALUES (1003, 'Amit kumar', 'Manager', 1004, '1986-04-02', 2000, NULL, 30, 'Pune');
+INSERT INTO Employee VALUES (1004, 'Nitin kulkarni', 'President', NULL, '1986-04-19', 50000, NULL, 10, 'Mumbai');
+INSERT INTO Employee VALUES (1005, 'Niraj Sharma', 'Analyst', 1003, '1998-12-03', 12000, NULL, 20, 'Satara');
+INSERT INTO Employee VALUES (1006, 'Pushkar deshpande', 'Salesman', 1003, '1996-09-01', 6500, 1500, 30, 'Pune');
+INSERT INTO Employee VALUES (1007, 'Sumit patil', 'Manager', 1004, '1991-05-01', 25000, NULL, 20, 'Mumbai');
+INSERT INTO Employee VALUES (1008, 'Ravi sawant', 'Analyst', 1007, '1995-11-17', 10000, NULL, NULL, 'Amaravati');
+-- Inserts employee records
+
+
+-- =========================
+-- 3) SQL QUERIES (DML)
+-- =========================
+
+-- 1) Display employee information with column names
+SELECT Empno, Ename, Job, Mgr, Joined_date, Salary, Commission, Deptno, Address 
+FROM Employee;
+-- Displays all employee details
+
+-- 2) Display unique jobs
+SELECT DISTINCT Job FROM Employee;
+-- Shows unique job roles
+
+-- 3) Update department location
+UPDATE Department 
+SET Location = 'Bangalore' 
+WHERE Deptno = 40;
+-- Updates location of dept 40
+
+-- 4) Update employee name
+UPDATE Employee 
+SET Ename = 'Nikhil Gosavi' 
+WHERE Empno = 1003;
+-- Changes employee name
+
+-- 5) Delete employee
+DELETE FROM Employee 
+WHERE Ename = 'Pushkar deshpande';
+-- Deletes specified employee
+
+-- 6) Employees with job Manager or Analyst (OR)
+SELECT * FROM Employee 
+WHERE Job = 'Manager' OR Job = 'Analyst';
+-- Displays employees using OR
+
+-- 6) Employees with job Manager or Analyst (IN)
+SELECT * FROM Employee 
+WHERE Job IN ('Manager', 'Analyst');
+-- Displays employees using IN
+
+-- 7) Employees in departments 10,20,30,40
+SELECT Ename, Deptno 
+FROM Employee 
+WHERE Deptno IN (10,20,30,40);
+-- Displays employees in given departments
+
+-- 8) Names starting with 'A'
+SELECT Ename, Joined_date 
+FROM Employee 
+WHERE Ename LIKE 'A%';
+-- Finds employees whose names start with A
+
+-- 9) Second letter is 'i'
+SELECT Ename 
+FROM Employee 
+WHERE Ename LIKE '_i%';
+-- Finds employees with 'i' as second letter
+
+-- 10) Deptno with max salary > 5000
+SELECT Deptno, MAX(Salary) 
+FROM Employee 
+GROUP BY Deptno 
+HAVING MAX(Salary) > 5000;
+-- Displays department with max salary greater than 5000
       {
         title: "Practical No : 3",
         code: `EXP 03
