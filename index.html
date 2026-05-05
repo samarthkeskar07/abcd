@@ -409,9 +409,7 @@ WHERE company_name = 'TCS';
       },
       {
         title: "Practical No : 2",
-        code: `EXP 02
-
--- =========================
+        code: `-- =========================
 -- 1) CREATE TABLE DEPARTMENT
 -- =========================
 
@@ -519,12 +517,11 @@ SELECT Deptno, MAX(Salary)
 FROM Employee 
 GROUP BY Deptno 
 HAVING MAX(Salary) > 5000;
--- Displays department with max salary greater than 5000
+-- Displays department with max salary greater than 5000`
+      },
       {
         title: "Practical No : 3",
-        code: `EXP 03
-
--- =========================
+        code: `-- =========================
 -- 1) CREATE TABLES WITH CONSTRAINTS
 -- =========================
 
@@ -665,9 +662,7 @@ WHERE employee_name IN (
       },
       {
         title: "Practical No : 4",
-        code: `EXP 04 NEW
-
-SET SERVEROUTPUT ON;
+        code: `SET SERVEROUTPUT ON;
 
 CREATE TABLE Borrower (
     Rollin NUMBER PRIMARY KEY,
@@ -745,9 +740,7 @@ END;
       },
       {
         title: "Practical No : 5",
-        code: `EXP 05 NEW 
-
--- =========================
+        code: `-- =========================
 -- PROBLEM STATEMENT (MAIN)
 -- =========================
 -- Write a PL/SQL block using parameterized cursor to merge records 
@@ -829,9 +822,7 @@ END;
       },
       {
         title: "Practical No : 6",
-        code: `EXP 06 NEW 
-
--- =========================
+        code: `-- =========================
 -- PROBLEM STATEMENT (STORED PROCEDURE)
 -- =========================
 -- Write a stored procedure proc_Grade to categorize students based on total marks 
@@ -906,7 +897,7 @@ BEGIN
     CLOSE c1;
 
 END;
-/
+/ 
 
 -- =========================
 -- CALL THE PROCEDURE (IMPORTANT)
@@ -915,7 +906,7 @@ END;
 BEGIN
     proc_Grade;
 END;
-/
+/ 
 
 -- =========================
 -- DISPLAY OUTPUT
@@ -925,9 +916,7 @@ SELECT * FROM Result;`
       },
       {
         title: "Practical No : 7",
-        code: `EXP 07 NEW
-
--- =========================
+        code: `-- =========================
 -- PROBLEM STATEMENT (MAIN)
 -- =========================
 -- Write database trigger on Library table to track UPDATE and DELETE operations.
@@ -979,122 +968,4 @@ DECLARE
 BEGIN
 
     IF UPDATING THEN
-        v_operation := 'UPDATE';
-    ELSIF DELETING THEN
-        v_operation := 'DELETE';
-    END IF;
-
-    INSERT INTO Library_Audit
-    VALUES (:OLD.Book_id, :OLD.Book_name, :OLD.Author, :OLD.Price,
-            v_operation, SYSDATE);
-
-END;
-/
-    
-
--- =========================
--- OPERATIONS (TO FIRE TRIGGER)
--- =========================
-
--- Update (fires trigger)
-UPDATE Library 
-SET Price = 700 
-WHERE Book_id = 1;
-
--- Delete (fires trigger)
-DELETE FROM Library 
-WHERE Book_id = 2;
-
-COMMIT;
-
-
--- =========================
--- DISPLAY OUTPUT
--- =========================
-
-SELECT * FROM Library_Audit;`
-      }
-    ];
-
-    function escHtml(s) {
-      return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-    }
-
-    const keywords = /\b(CREATE|TABLE|PRIMARY|KEY|VARCHAR2|NUMBER|INSERT|INTO|VALUES|SELECT|FROM|WHERE|UPDATE|DELETE|SET|OR|REPLACE|TRIGGER|AFTER|ON|FOR|EACH|ROW|BEGIN|END|PROCEDURE|CURSOR|OPEN|LOOP|FETCH|EXIT|WHEN|CLOSE|FOREIGN|REFERENCES|JOIN|INNER|LEFT|RIGHT|VIEW|INDEX|SEQUENCE|SYNONYM|ALTER|ADD|MODIFY|DROP|COLUMN|RENAME|TRUNCATE|NOT|NULL|UNIQUE|CHECK|CONSTRAINT|IN|AS|IS|START|WITH|INCREMENT|BY)\b/g;
-    const types = /\b(Employee|Department|Emp_Log|Emp_View|Emp_Dept_View|Emp|DBMS_OUTPUT|AVG|MAX)\b/g;
-    const strRe = /("[^"]*"|'[^']*')/g;
-    const commentRe = /(\/\/.*$)/gm;
-    const numberRe = /\b(\d+)\b/g;
-
-    function highlightLine(line) {
-      let html = escHtml(line);
-      html = html.replace(commentRe, '<span class="comment">$1</span>');
-      html = html.replace(strRe, '<span class="string">$1</span>');
-      html = html.replace(keywords, '<span class="keyword">$1</span>');
-      html = html.replace(types, '<span class="type">$1</span>');
-      html = html.replace(numberRe, '<span class="number">$1</span>');
-      return html;
-    }
-
-    function makeLines(code) {
-      const lines = code.split('\n');
-      return lines.map(l => {
-        const has = keywords.test(l) || types.test(l);
-        keywords.lastIndex = 0;
-        types.lastIndex = 0;
-        return `<div class="line${has ? ' has-keyword' : ''}">${highlightLine(l) || ' '}</div>`;
-      }).join('');
-    }
-
-    function toggleTheme() {
-      document.body.classList.toggle('light');
-      const btn = document.querySelector('.theme-toggle');
-      btn.textContent = document.body.classList.contains('light') ? 'Dark' : 'Light';
-    }
-
-    function copyCode(raw, btn) {
-      navigator.clipboard.writeText(raw).then(() => {
-        btn.textContent = 'Copied!';
-        btn.classList.add('copied');
-        setTimeout(() => {
-          btn.textContent = 'Copy';
-          btn.classList.remove('copied');
-        }, 1200);
-      });
-    }
-
-    const row1 = document.getElementById('row1');
-    const row2 = document.getElementById('row2');
-
-    programs.forEach((p, i) => {
-      const card = document.createElement('div');
-      card.className = 'card';
-
-      const header = document.createElement('div');
-      header.className = 'card-header';
-
-      const title = document.createElement('div');
-      title.className = 'card-title';
-      title.textContent = p.title;
-
-      const btn = document.createElement('button');
-      btn.className = 'copy-btn';
-      btn.textContent = 'Copy';
-      btn.addEventListener('click', () => copyCode(p.code, btn));
-
-      header.appendChild(title);
-      header.appendChild(btn);
-
-      const codeWrap = document.createElement('div');
-      codeWrap.className = 'code-container';
-      codeWrap.innerHTML = '<pre>' + makeLines(p.code) + '</pre>';
-
-      card.appendChild(header);
-      card.appendChild(codeWrap);
-
-      if (i < 5) row1.appendChild(card);
-      else row2.appendChild(card);
-    });
-  </script>
-</body>
-</html>
+        v
