@@ -84,12 +84,11 @@
     .row {
       display: flex;
       gap: 14px;
-      /* Keep cards on a single line but allow them to shrink to fit the viewport (no horizontal scroll on rows) */
       flex-wrap: nowrap;
       align-items: flex-start;
       width: 100%;
       padding-bottom: 6px;
-      overflow: visible; /* ensure the row itself doesn't force scrolling */
+      overflow: visible;
     }
 
     .card {
@@ -98,9 +97,8 @@
       border-radius: 8px;
       padding: 14px;
       height: 300px;
-      /* Allow cards to grow/shrink so the whole row fits the viewport without scrolling */
       flex: 1 1 calc(20% - 14px);
-      min-width: 0; /* important so children can shrink and avoid overflow */
+      min-width: 0;
       display: flex;
       flex-direction: column;
       transition: border-color 0.3s;
@@ -171,15 +169,13 @@
     .code-container {
       flex: 1;
       overflow-y: auto;
-      /* Allow horizontal scrolling only inside the code block for long lines */
       overflow-x: auto;
-      white-space: pre; /* keep long lines on one line so horizontal scroll will activate */
+      white-space: pre;
       background: #000000;
       padding: 10px;
       border-radius: 6px;
     }
 
-    /* Keep the code container black in both themes for requested look, but keep the light-theme border for separation */
     body.light .code-container {
       background: #000000;
       border: 1px solid #d0d7de;
@@ -212,12 +208,10 @@
       white-space: pre;
     }
 
-    /* Force pre text to remain high-contrast on black code background */
     body.light pre {
       color: #c9d1d9;
     }
 
-    /* Specific sizing: first row = 5-per-row (20%), second row = 4-per-row (25%) */
     #row1 .card { flex: 0 0 calc(20% - 14px); }
     #row2 .card { flex: 0 0 calc(25% - 14px); }
 
@@ -249,7 +243,6 @@
     body.light .comment { color: #6e7781; }
     body.light .number { color: #0550ae; }
 
-    /* Mobile view: 2 cards per row with vertical scroll */
     @media (max-width: 768px) {
       .container {
         flex-direction: row;
@@ -271,8 +264,6 @@
         min-height: 250px;
       }
     }
-
-            
   </style>
 </head>
 <body>
@@ -414,7 +405,9 @@ WHERE driver_id = 1;
 UPDATE comp_syn
 SET city = 'Pune'
 WHERE company_name = 'TCS';
--- Updates Company table using synonym
+-- Updates Company table using synonym`
+      },
+      {
         title: "Practical No : 2",
         code: `salary=[49000,64000,81000,100000,121000,144000,169000,196000]
 def selectionsort(salarylist):
@@ -579,7 +572,8 @@ WHERE employee_name IN (
     JOIN Company c ON w.company_name = c.company_name
     WHERE c.city = 'Gotham'
 );
--- DELETE using JOIN in subquery
+-- DELETE using JOIN in subquery`
+      },
       {
         title: "Practical No : 4",
         code: `EXP 04 NEW
@@ -658,6 +652,8 @@ EXCEPTION
         DBMS_OUTPUT.PUT_LINE('Error Occurred');
 END;
 /
+`
+      },
       {
         title: "Practical No : 5",
         code: `EXP 05 NEW 
@@ -740,9 +736,11 @@ BEGIN
 
 END;
 /
+`
+      },
       {
         title: "Practical No : 6",
-        code: EXP 06 NEW 
+        code: `EXP 06 NEW 
 
 -- =========================
 -- PROBLEM STATEMENT (STORED PROCEDURE)
@@ -834,7 +832,9 @@ END;
 -- DISPLAY OUTPUT
 -- =========================
 
-SELECT * FROM Result; {
+SELECT * FROM Result;`
+      },
+      {
         title: "Practical No : 7",
         code: `EXP 07 NEW
 
@@ -923,7 +923,10 @@ COMMIT;
 -- DISPLAY OUTPUT
 -- =========================
 
-SELECT * FROM Library_Audit;
+SELECT * FROM Library_Audit;`
+      }
+    ];
+
     function escHtml(s) {
       return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     }
