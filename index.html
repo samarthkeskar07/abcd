@@ -281,739 +281,737 @@
     const programs = [
       {
         title: "Practical No : 1",
-        code: `-- 1) CREATE TABLES
+        code: `<!DOCTYPE html>
+<html>
+<head>
+    <title>My Personal Details</title>
+</head>
+<body>
 
-CREATE TABLE Person (
-    driver_id INT PRIMARY KEY,
-    name VARCHAR(50),
-    address VARCHAR(100)
-); -- Creates Person table with primary key
+    <h1><u>Personal Details</u></h1>
 
-CREATE TABLE Car (
-    license VARCHAR(20) PRIMARY KEY,
-    model VARCHAR(50),
-    year INT
-); -- Creates Car table with license as primary key
+    <p><b>Name:</b> Samarth keskar</p>
+    <p><strong>Age:</strong> 20</p>
+    <p><i>Course:</i> Computer Science</p>
+    <p><em>University:</em> SPPU University</p>
+    <p><u>Email:</u> sam@example.com</p>
 
-CREATE TABLE Accident (
-    report_no INT PRIMARY KEY,
-    date_acc DATE,
-    location VARCHAR(100)
-); -- Creates Accident table
+    <h2><b>About Me</b></h2>
+    <p>
+        I am a <strong>hardworking</strong> and <em>dedicated</em> student who loves 
+        <i>programming</i> and <u>web development</u>.
+    </p>
 
-CREATE TABLE Owns (
-    driver_id INT,
-    license VARCHAR(20),
-    PRIMARY KEY (driver_id, license)
-); -- Creates Owns relationship table
-
-CREATE TABLE Participated (
-    driver_id INT,
-    model VARCHAR(50),
-    report_no INT,
-    damage_amount DECIMAL(10,2),
-    PRIMARY KEY (driver_id, report_no)
-); -- Creates Participated table
-
-
--- EMPLOYEE DATABASE TABLES
-
-CREATE TABLE Employee (
-    employee_name VARCHAR(50) PRIMARY KEY,
-    street VARCHAR(100),
-    city VARCHAR(50)
-); -- Creates Employee table
-
-CREATE TABLE Works (
-    employee_name VARCHAR(50),
-    company_name VARCHAR(50),
-    salary DECIMAL(10,2),
-    PRIMARY KEY (employee_name, company_name)
-); -- Creates Works table
-
-CREATE TABLE Company (
-    company_name VARCHAR(50) PRIMARY KEY,
-    city VARCHAR(50)
-); -- Creates Company table
-
-CREATE TABLE Manages (
-    employee_name VARCHAR(50),
-    manager_name VARCHAR(50),
-    PRIMARY KEY (employee_name)
-); -- Creates Manages table
-
-
--- 2) CREATE VIEW
-
-CREATE VIEW emp_company_view AS
-SELECT e.employee_name, w.company_name
-FROM Employee e
-JOIN Works w ON e.employee_name = w.employee_name;
--- Creates view showing employee and company
-
-
--- 3) CREATE INDEX
-
-CREATE INDEX emp_index 
-ON Employee(employee_name);
--- Creates index on Employee table
-
-CREATE INDEX part_index 
-ON Participated(driver_id);
--- Creates index on Participated table
-
-
--- 4) CREATE SEQUENCE + INSERT
-
-CREATE SEQUENCE person_seq
-START WITH 1
-INCREMENT BY 1;
--- Creates sequence for auto-generating driver_id
-
-INSERT INTO Person VALUES (person_seq.NEXTVAL, 'Rohit', 'Pune');
-INSERT INTO Person VALUES (person_seq.NEXTVAL, 'Amit', 'Mumbai');
-INSERT INTO Person VALUES (person_seq.NEXTVAL, 'Raj', 'Delhi');
-INSERT INTO Person VALUES (person_seq.NEXTVAL, 'Neha', 'Nashik');
--- Inserts 4 records using sequence
-
-
--- 5) CREATE SYNONYM
-
-CREATE SYNONYM part_syn FOR Participated;
--- Creates synonym for Participated table
-
-CREATE SYNONYM comp_syn FOR Company;
--- Creates synonym for Company table
-
-
--- DISPLAY USING SYNONYM
-
-SELECT * FROM part_syn;
--- Displays records from Participated using synonym
-
-SELECT * FROM comp_syn;
--- Displays records from Company using synonym
-
-
--- UPDATE USING SYNONYM
-
-UPDATE part_syn
-SET damage_amount = 5000
-WHERE driver_id = 1;
--- Updates Participated table using synonym
-
-UPDATE comp_syn
-SET city = 'Pune'
-WHERE company_name = 'TCS';
--- Updates Company table using synonym`
+</body>
+</html>`
       },
       {
         title: "Practical No : 2",
-        code: `EXP 02
+        code: `<!DOCTYPE html>
+<html>
+<head>
+    <title>Image, Hyperlink and Nested Table</title>
+</head>
+<body>
 
--- =========================
--- 1) CREATE TABLE DEPARTMENT
--- =========================
+    <h1>Student Information</h1>
 
-CREATE TABLE Department (
-    Deptno INT PRIMARY KEY,
-    Dname VARCHAR(50) NOT NULL,
-    Location VARCHAR(50)
-); -- Creates Department table with constraints
+    <!-- Image -->
+    <img src="https://via.placeholder.com/200"
+         alt="Sample Image"
+         width="200"
+         height="200">
 
-INSERT INTO Department VALUES (10, 'Accounting', 'Mumbai');
-INSERT INTO Department VALUES (20, 'Research', 'Pune');
-INSERT INTO Department VALUES (30, 'Sales', 'Nashik');
-INSERT INTO Department VALUES (40, 'Operations', 'Nagpur');
--- Inserts department records
+    <br><br>
 
+    <!-- Hyperlink -->
+    <a href="https://www.google.com" target="_blank">
+        Visit Google
+    </a>
 
--- =========================
--- 2) CREATE TABLE EMPLOYEE
--- =========================
+    <br><br>
 
-CREATE TABLE Employee (
-    Empno INT PRIMARY KEY,
-    Ename VARCHAR(50) NOT NULL,
-    Job VARCHAR(50),
-    Mgr INT,
-    Joined_date DATE,
-    Salary DECIMAL(10,2),
-    Commission DECIMAL(10,2),
-    Deptno INT,
-    Address VARCHAR(50),
-    FOREIGN KEY (Deptno) REFERENCES Department(Deptno)
-); -- Creates Employee table with foreign key
+    <!-- Main Table -->
+    <table border="1" cellpadding="10">
 
-INSERT INTO Employee VALUES (1001, 'Nilesh joshi', 'Clerk', 1005, '1995-12-17', 2800, 600, 20, 'Nashik');
-INSERT INTO Employee VALUES (1002, 'Avinash pawar', 'Salesman', 1003, '1996-02-20', 5000, 1200, 30, 'Nagpur');
-INSERT INTO Employee VALUES (1003, 'Amit kumar', 'Manager', 1004, '1986-04-02', 2000, NULL, 30, 'Pune');
-INSERT INTO Employee VALUES (1004, 'Nitin kulkarni', 'President', NULL, '1986-04-19', 50000, NULL, 10, 'Mumbai');
-INSERT INTO Employee VALUES (1005, 'Niraj Sharma', 'Analyst', 1003, '1998-12-03', 12000, NULL, 20, 'Satara');
-INSERT INTO Employee VALUES (1006, 'Pushkar deshpande', 'Salesman', 1003, '1996-09-01', 6500, 1500, 30, 'Pune');
-INSERT INTO Employee VALUES (1007, 'Sumit patil', 'Manager', 1004, '1991-05-01', 25000, NULL, 20, 'Mumbai');
-INSERT INTO Employee VALUES (1008, 'Ravi sawant', 'Analyst', 1007, '1995-11-17', 10000, NULL, NULL, 'Amaravati');
--- Inserts employee records
+        <tr>
+            <th>Name</th>
+            <th>Details</th>
+        </tr>
 
+        <tr>
+            <td>John</td>
 
--- =========================
--- 3) SQL QUERIES (DML)
--- =========================
+            <td>
+                <!-- Nested Table -->
+                <table border="1" cellpadding="5">
 
--- 1) Display employee information with column names
-SELECT Empno, Ename, Job, Mgr, Joined_date, Salary, Commission, Deptno, Address 
-FROM Employee;
--- Displays all employee details
+                    <tr>
+                        <th>Subject</th>
+                        <th>Marks</th>
+                    </tr>
 
--- 2) Display unique jobs
-SELECT DISTINCT Job FROM Employee;
--- Shows unique job roles
+                    <tr>
+                        <td>HTML</td>
+                        <td>85</td>
+                    </tr>
 
--- 3) Update department location
-UPDATE Department 
-SET Location = 'Bangalore' 
-WHERE Deptno = 40;
--- Updates location of dept 40
+                    <tr>
+                        <td>CSS</td>
+                        <td>90</td>
+                    </tr>
 
--- 4) Update employee name
-UPDATE Employee 
-SET Ename = 'Nikhil Gosavi' 
-WHERE Empno = 1003;
--- Changes employee name
+                </table>
+            </td>
 
--- 5) Delete employee
-DELETE FROM Employee 
-WHERE Ename = 'Pushkar deshpande';
--- Deletes specified employee
+        </tr>
 
--- 6) Employees with job Manager or Analyst (OR)
-SELECT * FROM Employee 
-WHERE Job = 'Manager' OR Job = 'Analyst';
--- Displays employees using OR
+    </table>
 
--- 6) Employees with job Manager or Analyst (IN)
-SELECT * FROM Employee 
-WHERE Job IN ('Manager', 'Analyst');
--- Displays employees using IN
-
--- 7) Employees in departments 10,20,30,40
-SELECT Ename, Deptno 
-FROM Employee 
-WHERE Deptno IN (10,20,30,40);
--- Displays employees in given departments
-
--- 8) Names starting with 'A'
-SELECT Ename, Joined_date 
-FROM Employee 
-WHERE Ename LIKE 'A%';
--- Finds employees whose names start with A
-
--- 9) Second letter is 'i'
-SELECT Ename 
-FROM Employee 
-WHERE Ename LIKE '_i%';
--- Finds employees with 'i' as second letter
-
--- 10) Deptno with max salary > 5000
-SELECT Deptno, MAX(Salary) 
-FROM Employee 
-GROUP BY Deptno 
-HAVING MAX(Salary) > 5000;
--- Displays department with max salary greater than 5000)`
+</body>
+</html>`
       },
       {
         title: "Practical No : 3",
-        code: `EXP 03
+        code: `<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Form</title>
+</head>
+<body>
 
--- =========================
--- 1) CREATE TABLES WITH CONSTRAINTS
--- =========================
+    <h1>Student Registration Form</h1>
 
-CREATE TABLE Employee (
-    employee_name VARCHAR(50) PRIMARY KEY,
-    street VARCHAR(100) NOT NULL,
-    city VARCHAR(50) NOT NULL
-); -- Creates Employee table with primary key and NOT NULL
+    <form>
 
-CREATE TABLE Company (
-    company_name VARCHAR(50) PRIMARY KEY,
-    city VARCHAR(50) NOT NULL
-); -- Creates Company table
+        <!-- Name -->
+        <label>Name:</label>
+        <input type="text" name="name">
+        
+        <br><br>
 
-CREATE TABLE Works (
-    employee_name VARCHAR(50),
-    company_name VARCHAR(50),
-    salary DECIMAL(10,2) CHECK (salary > 0),
-    PRIMARY KEY (employee_name, company_name),
-    FOREIGN KEY (employee_name) REFERENCES Employee(employee_name),
-    FOREIGN KEY (company_name) REFERENCES Company(company_name)
-); -- Creates Works table with FK and salary constraint
+        <!-- Email -->
+        <label>Email:</label>
+        <input type="email" name="email">
 
-CREATE TABLE Manages (
-    employee_name VARCHAR(50),
-    manager_name VARCHAR(50),
-    PRIMARY KEY (employee_name),
-    FOREIGN KEY (employee_name) REFERENCES Employee(employee_name)
-); -- Creates Manages table
+        <br><br>
 
+        <!-- Gender -->
+        <label>Gender:</label>
 
--- =========================
--- SAMPLE VIEW (FOR REQUIREMENT)
--- =========================
+        <input type="radio" name="gender" value="Male"> Male
+        <input type="radio" name="gender" value="Female"> Female
 
-CREATE VIEW emp_company_view AS
-SELECT e.employee_name, w.company_name, w.salary
-FROM Employee e
-JOIN Works w ON e.employee_name = w.employee_name;
--- Creates view combining employee and company
+        <br><br>
 
+        <!-- Date of Birth -->
+        <label>Date of Birth:</label>
+        <input type="date" name="dob">
 
--- =========================
--- 2) SQL QUERIES (JOIN, SUBQUERY, VIEW)
--- =========================
+        <br><br>
 
--- 1) Employees working for First Bank Corporation
-SELECT e.employee_name
-FROM Employee e
-JOIN Works w ON e.employee_name = w.employee_name
-WHERE w.company_name = 'First Bank Corporation';
--- Uses JOIN to filter employees
+        <!-- Submit Button -->
+        <input type="submit" value="Submit">
 
--- 2) Names and cities of employees working for First Bank Corporation
-SELECT e.employee_name, e.city
-FROM Employee e
-JOIN Works w ON e.employee_name = w.employee_name
-WHERE w.company_name = 'First Bank Corporation';
--- JOIN with projection
+    </form>
 
--- 3) Employees working for First Bank Corporation earning > 10000
-SELECT e.employee_name, e.street, e.city
-FROM Employee e
-JOIN Works w ON e.employee_name = w.employee_name
-WHERE w.company_name = 'First Bank Corporation'
-AND w.salary > 10000;
--- JOIN with condition
-
--- 4) Employees earning more than each employee of Small Bank Corporation
-SELECT employee_name
-FROM Works
-WHERE salary > ALL (
-    SELECT salary 
-    FROM Works 
-    WHERE company_name = 'Small Bank Corporation'
-);
--- Subquery with ALL operator
-
--- 5) Employees earning more than average salary of their company
-SELECT w.employee_name
-FROM Works w
-WHERE w.salary > (
-    SELECT AVG(salary)
-    FROM Works
-    WHERE company_name = w.company_name
-);
--- Correlated subquery
-
--- 6) Company with smallest payroll
-SELECT company_name
-FROM Works
-GROUP BY company_name
-HAVING SUM(salary) <= ALL (
-    SELECT SUM(salary)
-    FROM Works
-    GROUP BY company_name
-);
--- Aggregation + subquery
-
--- 7) Companies with avg salary higher than First Bank Corporation
-SELECT company_name
-FROM Works
-GROUP BY company_name
-HAVING AVG(salary) > (
-    SELECT AVG(salary)
-    FROM Works
-    WHERE company_name = 'First Bank Corporation'
-);
--- Subquery with GROUP BY
-
--- 8) Give 10% raise to First Bank Corporation employees
-UPDATE Works
-SET salary = salary * 1.10
-WHERE company_name = 'First Bank Corporation';
--- UPDATE with condition
-
--- 9) Insert high earners into new table
-CREATE TABLE HighEarners (
-    employee_name VARCHAR(50),
-    salary DECIMAL(10,2)
-); -- Creates HighEarners table
-
-INSERT INTO HighEarners
-SELECT employee_name, salary
-FROM Works
-WHERE salary > (SELECT AVG(salary) FROM Works);
--- INSERT using subquery
-
--- 10) Delete employees working in companies located in Gotham
-DELETE FROM Employee
-WHERE employee_name IN (
-    SELECT w.employee_name
-    FROM Works w
-    JOIN Company c ON w.company_name = c.company_name
-    WHERE c.city = 'Gotham'
-);
--- DELETE using JOIN in subquery`
+</body>
+</html>`
       },
       {
         title: "Practical No : 4",
-        code: `EXP 04 NEW
+        code: `HTML             <!DOCTYPE html>
+<html>
+<head>
+    <title>CSS Example</title>
 
-SET SERVEROUTPUT ON;
+    <!-- Internal CSS -->
+    <style>
+        h1 {
+            color: blue;
+            text-align: center;
+        }
 
-CREATE TABLE Borrower (
-    Rollin NUMBER PRIMARY KEY,
-    Name VARCHAR2(50),
-    DateofIssue DATE,
-    NameofBook VARCHAR2(50),
-    Status VARCHAR2(1)
-);
+        table {
+            width: 50%;
+            border-collapse: collapse;
+        }
 
-CREATE TABLE Fine (
-    Roll_no NUMBER,
-    Datee DATE,
-    Amt NUMBER
-);
+        th {
+            background-color: lightgray;
+        }
 
-INSERT INTO Borrower 
-VALUES (1, 'Amit', DATE '2026-04-01', 'DBMS', 'I');
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
 
-INSERT INTO Borrower 
-VALUES (2, 'Ravi', DATE '2026-04-10', 'Python', 'I');
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
 
+</head>
+<body>
 
-DECLARE
+    <!-- Inline CSS -->
+    <h1 style="background-color: yellow;">
+        Student Details
+    </h1>
 
-    v_rollno Borrower.Rollin%TYPE;
-    v_book Borrower.NameofBook%TYPE;
-    v_date Borrower.DateofIssue%TYPE;
+    <table>
 
-    v_days NUMBER;
-    v_fine NUMBER := 0;
+        <tr>
+            <th>Name</th>
+            <th>Marks</th>
+        </tr>
 
-BEGIN
+        <tr>
+            <td>John</td>
+            <td>85</td>
+        </tr>
 
-    v_rollno := &Roll_Number;
-    v_book := '&Book_Name';
+        <tr>
+            <td>Sam</td>
+            <td>90</td>
+        </tr>
 
-    SELECT DateofIssue 
-    INTO v_date
-    FROM Borrower
-    WHERE Rollin = v_rollno
-    AND NameofBook = v_book;
+    </table>
 
-    v_days := SYSDATE - v_date;
+</body>
+</html>
 
-    IF v_days BETWEEN 15 AND 30 THEN
-        v_fine := v_days * 5;
-    ELSIF v_days > 30 THEN
-        v_fine := v_days * 50;
-    ELSE
-        v_fine := 0;
-    END IF;
+<style>
+...
+</style>
 
-    IF v_fine > 0 THEN
-        INSERT INTO Fine 
-        VALUES (v_rollno, SYSDATE, v_fine);
-    END IF;
-
-    UPDATE Borrower
-    SET Status = 'R'
-    WHERE Rollin = v_rollno
-    AND NameofBook = v_book;
-
-    DBMS_OUTPUT.PUT_LINE('Book Returned Successfully');
-    DBMS_OUTPUT.PUT_LINE('Number of Days = ' || v_days);
-    DBMS_OUTPUT.PUT_LINE('Fine Amount = ' || v_fine);
-
-EXCEPTION
-    WHEN NO_DATA_FOUND THEN
-        DBMS_OUTPUT.PUT_LINE('Record Not Found');
-    WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Error Occurred');
-END;
-/
+<link rel="stylesheet" href="style.css">                         css                       body {
+    font-family: Arial;
+    background-color: lightblue;
+}style="background-color: yellow;"
 `
       },
       {
         title: "Practical No : 5",
-        code: `EXP 05 NEW 
+        code: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsive Bootstrap Page</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
 
--- =========================
--- PROBLEM STATEMENT (MAIN)
--- =========================
--- Write a PL/SQL block using parameterized cursor to merge records 
--- from N_RollCall into O_RollCall. If record already exists, skip it.
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">MySite</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
--- =========================
--- TABLE CREATION
--- =========================
+  <!-- Hero -->
+  <section class="bg-light py-5">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-12 col-md-6">
+          <h1 class="display-5 fw-bold">Build Responsive Layouts Easily</h1>
+          <p class="lead">
+            This page uses Bootstrap Grid and Components to adapt smoothly across screen sizes.
+          </p>
+          <a href="#" class="btn btn-primary btn-lg">Get Started</a>
+        </div>
+        <div class="col-12 col-md-6 mt-4 mt-md-0">
+          <img src="https://via.placeholder.com/600x400" class="img-fluid rounded" alt="Sample image">
+        </div>
+      </div>
+    </div>
+  </section>
 
-CREATE TABLE O_RollCall (
-    Rollno NUMBER PRIMARY KEY,
-    Name VARCHAR2(50)
-);
+  <!-- Features -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-12 col-md-4">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+              <h5 class="card-title">Fast</h5>
+              <p class="card-text">Built with Bootstrap utilities and ready-made components.</p>
+              <a href="#" class="btn btn-outline-primary">Learn More</a>
+            </div>
+          </div>
+        </div>
 
-CREATE TABLE N_RollCall (
-    Rollno NUMBER,
-    Name VARCHAR2(50)
-);
+        <div class="col-12 col-md-4">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+              <h5 class="card-title">Responsive</h5>
+              <p class="card-text">Columns stack on mobile and expand on larger screens.</p>
+              <a href="#" class="btn btn-outline-primary">Learn More</a>
+            </div>
+          </div>
+        </div>
 
+        <div class="col-12 col-md-4">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+              <h5 class="card-title">Clean</h5>
+              <p class="card-text">A simple structure that is easy to customize.</p>
+              <a href="#" class="btn btn-outline-primary">Learn More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
--- =========================
--- SAMPLE DATA
--- =========================
+  <!-- Contact Form -->
+  <section class="bg-light py-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-8">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h2 class="card-title mb-4">Contact Us</h2>
+              <form>
+                <div class="mb-3">
+                  <label for="name" class="form-label">Name</label>
+                  <input type="text" class="form-control" id="name" placeholder="Enter your name">
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                </div>
+                <div class="mb-3">
+                  <label for="message" class="form-label">Message</label>
+                  <textarea class="form-control" id="message" rows="4" placeholder="Write your message"></textarea>
+                </div>
+                <button type="submit" class="btn btn-success">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-INSERT INTO O_RollCall VALUES (1, 'Amit');
-INSERT INTO O_RollCall VALUES (2, 'Ravi');
-
-INSERT INTO N_RollCall VALUES (2, 'Ravi');
-INSERT INTO N_RollCall VALUES (3, 'Neha');
-INSERT INTO N_RollCall VALUES (4, 'Pooja');
-
-
--- =========================
--- PARAMETERIZED CURSOR
--- =========================
-
-SET SERVEROUTPUT ON;
-
-DECLARE
-
-    CURSOR c1 IS 
-        SELECT Rollno, Name FROM N_RollCall;
-
-    CURSOR c2 (p_roll NUMBER) IS
-        SELECT Rollno FROM O_RollCall WHERE Rollno = p_roll;
-
-    v_roll NUMBER;
-    v_name VARCHAR2(50);
-    v_temp NUMBER;
-
-BEGIN
-
-    OPEN c1;
-
-    LOOP
-        FETCH c1 INTO v_roll, v_name;
-        EXIT WHEN c1%NOTFOUND;
-
-        OPEN c2(v_roll);
-        FETCH c2 INTO v_temp;
-
-        IF c2%NOTFOUND THEN
-            INSERT INTO O_RollCall VALUES (v_roll, v_name);
-            DBMS_OUTPUT.PUT_LINE('Inserted: ' || v_roll);
-        ELSE
-            DBMS_OUTPUT.PUT_LINE('Skipped: ' || v_roll);
-        END IF;
-
-        CLOSE c2;
-
-    END LOOP;
-
-    CLOSE c1;
-
-END;
-/
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
 `
       },
       {
         title: "Practical No : 6",
-        code: `EXP 06 NEW 
+        code: `E<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Form Validation</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; }
+    form { max-width: 400px; padding: 20px; border: 1px solid #ccc; border-radius: 8px; }
+    input, button { width: 100%; padding: 10px; margin-top: 10px; box-sizing: border-box; }
+    .error { color: red; font-size: 14px; margin-top: 5px; }
+  </style>
+</head>
+<body>
 
--- =========================
--- PROBLEM STATEMENT (STORED PROCEDURE)
--- =========================
--- Write a stored procedure proc_Grade to categorize students based on total marks 
--- and store the result in Result table.
+  <form id="myForm" onsubmit="return validateForm()">
+    <h2>Contact Form</h2>
 
+    <label for="name">Name</label>
+    <input type="text" id="name" />
+    <div id="nameError" class="error"></div>
 
--- =========================
--- TABLE CREATION
--- =========================
+    <label for="email">Email</label>
+    <input type="email" id="email" />
+    <div id="emailError" class="error"></div>
 
-CREATE TABLE Stud_Marks (
-    Roll NUMBER PRIMARY KEY,
-    Name VARCHAR2(50),
-    Total_marks NUMBER
-);
+    <button type="submit">Submit</button>
+  </form>
 
-CREATE TABLE Result (
-    Roll NUMBER,
-    Name VARCHAR2(50),
-    Class VARCHAR2(50)
-);
+  <script>
+    function validateForm() {
+      let valid = true;
 
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
 
--- =========================
--- SAMPLE DATA
--- =========================
+      document.getElementById("nameError").textContent = "";
+      document.getElementById("emailError").textContent = "";
 
-INSERT INTO Stud_Marks VALUES (1, 'Amit', 1200);
-INSERT INTO Stud_Marks VALUES (2, 'Ravi', 950);
-INSERT INTO Stud_Marks VALUES (3, 'Neha', 870);
-INSERT INTO Stud_Marks VALUES (4, 'Pooja', 800);
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+      if (name === "") {
+        document.getElementById("nameError").textContent = "Name cannot be empty.";
+        valid = false;
+      }
 
--- =========================
--- STORED PROCEDURE
--- =========================
+      if (email === "") {
+        document.getElementById("emailError").textContent = "Email cannot be empty.";
+        valid = false;
+      } else if (!emailPattern.test(email)) {
+        document.getElementById("emailError").textContent = "Enter a valid email address.";
+        valid = false;
+      }
 
-CREATE OR REPLACE PROCEDURE proc_Grade IS
+      return valid;
+    }
+  </script>
 
-    CURSOR c1 IS SELECT Roll, Name, Total_marks FROM Stud_Marks;
-
-    v_roll Stud_Marks.Roll%TYPE;
-    v_name Stud_Marks.Name%TYPE;
-    v_marks Stud_Marks.Total_marks%TYPE;
-    v_class VARCHAR2(50);
-
-BEGIN
-
-    OPEN c1;
-
-    LOOP
-        FETCH c1 INTO v_roll, v_name, v_marks;
-        EXIT WHEN c1%NOTFOUND;
-
-        IF v_marks BETWEEN 990 AND 1500 THEN
-            v_class := 'Distinction';
-
-        ELSIF v_marks BETWEEN 900 AND 989 THEN
-            v_class := 'First Class';
-
-        ELSIF v_marks BETWEEN 825 AND 899 THEN
-            v_class := 'Higher Second Class';
-
-        ELSE
-            v_class := 'Fail';
-        END IF;
-
-        INSERT INTO Result VALUES (v_roll, v_name, v_class);
-
-    END LOOP;
-
-    CLOSE c1;
-
-END;
-/
-
--- =========================
--- CALL THE PROCEDURE (IMPORTANT)
--- =========================
-
-BEGIN
-    proc_Grade;
-END;
-/
-
--- =========================
--- DISPLAY OUTPUT
--- =========================
-
-SELECT * FROM Result;`
+</body>
+</html>`
       },
       {
         title: "Practical No : 7",
-        code: `EXP 07 NEW
+        code: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dynamic Content with DOM</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background: #f4f4f4;
+    }
+    .box {
+      max-width: 500px;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    button {
+      padding: 10px 15px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    #message {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #2c3e50;
+    }
+  </style>
+</head>
+<body>
 
--- =========================
--- PROBLEM STATEMENT (MAIN)
--- =========================
--- Write database trigger on Library table to track UPDATE and DELETE operations.
--- Store old values in Library_Audit table.
+  <div class="box">
+    <h2>Dynamic Content Example</h2>
+    <button onclick="showMessage()">Show Message</button>
+    <button onclick="addItem()">Add Item</button>
+
+    <div id="message"></div>
+    <ul id="list"></ul>
+  </div>
+
+  <script>
+    function showMessage() {
+      document.getElementById("message").textContent =
+        "Hello! This content was added dynamically using JavaScript DOM.";
+    }
+
+    function addItem() {
+      const li = document.createElement("li");
+      li.textContent = "New item added at " + new Date().toLocaleTimeString();
+      document.getElementById("list").appendChild(li);
+    }
+  </script>
+
+</body>
+</html>`
+
+title: "Practical No : 8",
+        code: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simple Calculator</title>
+</head>
+<body>
+  <h2>Simple Calculator</h2>
+
+  <script>
+    function add(a, b) {
+      return a + b;
+    }
+
+    function subtract(a, b) {
+      return a - b;
+    }
+
+    function multiply(a, b) {
+      return a * b;
+    }
+
+    function divide(a, b) {
+      if (b === 0) {
+        return "Cannot divide by zero";
+      }
+      return a / b;
+    }
+
+    function calculator() {
+      const num1 = parseFloat(prompt("Enter first number:"));
+      const operator = prompt("Enter operator (+, -, *, /):");
+      const num2 = parseFloat(prompt("Enter second number:"));
+
+      let result;
+
+      switch (operator) {
+        case "+":
+          result = add(num1, num2);
+          break;
+        case "-":
+          result = subtract(num1, num2);
+          break;
+        case "*":
+          result = multiply(num1, num2);
+          break;
+        case "/":
+          result = divide(num1, num2);
+          break;
+        default:
+          result = "Invalid operator";
+      }
+
+      alert("Result: " + result);
+    }
+
+    calculator();
+  </script>
+</body>
+</html>`
+      },
+      {
+title: "Practical No : 9",
+        code:'<?php
+date_default_timezone_set("Asia/Kolkata");
+
+echo "Welcome<br>";
+echo "Current Date and Time: " . date("d-m-Y h:i:s A");
+?>'
+},
+      {
+        title: "Practical No : 10",
+        code: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PHP POST Form</title>
+</head>
+<body>
+
+  <h2>Simple Form</h2>
+
+  <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+    Name: <input type="text" name="name"><br><br>
+    Email: <input type="email" name="email"><br><br>
+    <input type="submit" name="submit" value="Submit">
+  </form>
+
+  <?php
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+      $name = htmlspecialchars($_POST["name"]);
+      $email = htmlspecialchars($_POST["email"]);
+
+      echo "<h3>Submitted Data:</h3>";
+      echo "Name: " . $name . "<br>";
+      echo "Email: " . $email . "<br>";
+  }
+  ?>
+
+</body>
+</html>'
+
+},
+      {
+        title: "Practical No : 11",
+        code: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>String Manipulation</title>
+</head>
+<body>
+
+  <h2>PHP String Manipulation</h2>
+
+  <form method="post">
+    Enter String:
+    <input type="text" name="text">
+    <input type="submit" value="Submit">
+  </form>
+
+  <?php
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+      $text = $_POST["text"];
+
+      echo "<h3>Results:</h3>";
+      echo "Original String: " . $text . "<br>";
+      echo "Reversed String: " . strrev($text) . "<br>";
+      echo "Length of String: " . strlen($text) . "<br>";
+      echo "Substring (first 5 characters): " . substr($text, 0, 5) . "<br>";
+  }
+  ?>
+
+</body>
+</html>'
 
 
--- =========================
--- TABLE CREATION
--- =========================
+},
+      {
+        title: "Practical No : 12",
+        code: `<?php
+// METHOD 1: Simple indexed array
+echo "<h2>Method 1: Indexed Array</h2>";
+$fruits = array("Apple", "Banana", "Orange", "Mango", "Grapes");
+// OR using short syntax: $fruits = ["Apple", "Banana", "Orange", "Mango", "Grapes"];
 
-CREATE TABLE Library (
-    Book_id NUMBER PRIMARY KEY,
-    Book_name VARCHAR2(50),
-    Author VARCHAR2(50),
-    Price NUMBER
+// Display using print_r
+echo "<pre>";
+print_r($fruits);
+echo "</pre>";
+
+// Display using var_dump (shows data types)
+echo "<pre>";
+var_dump($fruits);
+echo "</pre>";
+
+// Display using foreach loop
+echo "<h3>Displaying using foreach loop:</h3>";
+echo "<ul>";
+foreach($fruits as $fruit) {
+    echo "<li>$fruit</li>";
+}
+echo "</ul>";
+
+
+// METHOD 2: Associative array (key-value pairs)
+echo "<h2>Method 2: Associative Array</h2>";
+$student = array(
+    "name" => "John Doe",
+    "age" => 20,
+    "course" => "Computer Science",
+    "grade" => "A"
 );
 
-CREATE TABLE Library_Audit (
-    Book_id NUMBER,
-    Book_name VARCHAR2(50),
-    Author VARCHAR2(50),
-    Price NUMBER,
-    Operation VARCHAR2(10),
-    Change_Date DATE
+echo "<pre>";
+print_r($student);
+echo "</pre>";
+
+echo "<h3>Student Details:</h3>";
+echo "<table border='1'>";
+foreach($student as $key => $value) {
+    echo "<tr>";
+    echo "<th>$key</th>";
+    echo "<td>$value</td>";
+    echo "</tr>";
+}
+echo "</table>";
+
+
+// METHOD 3: Multidimensional array
+echo "<h2>Method 3: Multidimensional Array</h2>";
+$employees = array(
+    array("name" => "Alice", "position" => "Manager", "salary" => 50000),
+    array("name" => "Bob", "position" => "Developer", "salary" => 40000),
+    array("name" => "Charlie", "position" => "Designer", "salary" => 35000)
 );
 
-
--- =========================
--- SAMPLE DATA
--- =========================
-
-INSERT INTO Library VALUES (1, 'DBMS', 'Korth', 500);
-INSERT INTO Library VALUES (2, 'Python', 'Guido', 600);
-
-COMMIT;
-
-
--- =========================
--- TRIGGER (FIXED VERSION)
--- =========================
-
-CREATE OR REPLACE TRIGGER trg_library_audit
-BEFORE UPDATE OR DELETE ON Library
-FOR EACH ROW
-
-DECLARE
-    v_operation VARCHAR2(10);
-
-BEGIN
-
-    IF UPDATING THEN
-        v_operation := 'UPDATE';
-    ELSIF DELETING THEN
-        v_operation := 'DELETE';
-    END IF;
-
-    INSERT INTO Library_Audit
-    VALUES (:OLD.Book_id, :OLD.Book_name, :OLD.Author, :OLD.Price,
-            v_operation, SYSDATE);
-
-END;
-/
-    
-
--- =========================
--- OPERATIONS (TO FIRE TRIGGER)
--- =========================
-
--- Update (fires trigger)
-UPDATE Library 
-SET Price = 700 
-WHERE Book_id = 1;
-
--- Delete (fires trigger)
-DELETE FROM Library 
-WHERE Book_id = 2;
-
-COMMIT;
+echo "<h3>Employees Data:</h3>";
+echo "<table border='1' cellpadding='5'>";
+echo "<tr bgcolor='#ccc'><th>Name</th><th>Position</th><th>Salary</th></tr>";
+foreach($employees as $employee) {
+    echo "<tr>";
+    echo "<td>" . $employee['name'] . "</td>";
+    echo "<td>" . $employee['position'] . "</td>";
+    echo "<td>$" . number_format($employee['salary'], 2) . "</td>";
+    echo "</tr>";
+}
+echo "</table>";
 
 
--- =========================
--- DISPLAY OUTPUT
--- =========================
+// METHOD 4: Storing values dynamically
+echo "<h2>Method 4: Dynamic Array Storage</h2>";
+$colors = array(); // Empty array
 
-SELECT * FROM Library_Audit;`
+// Adding values
+$colors[] = "Red";
+$colors[] = "Green";
+$colors[] = "Blue";
+array_push($colors, "Yellow", "Purple");
+
+echo "<h3>Colors:</h3>";
+echo "<select>";
+foreach($colors as $color) {
+    echo "<option value='$color'>$color</option>";
+}
+echo "</select>";
+
+
+// METHOD 5: Array with different data types
+echo "<h2>Method 5: Mixed Data Types</h2>";
+$mixed = array(10, "Hello", 3.14, true, array(1, 2, 3));
+
+echo "<pre>";
+print_r($mixed);
+echo "</pre>";
+
+
+// Additional useful array functions
+echo "<h2>Additional Array Operations</h2>";
+
+// Count elements
+$numbers = [1, 2, 3, 4, 5];
+echo "Number of elements: " . count($numbers) . "<br>";
+
+// Sort array
+sort($fruits);
+echo "Sorted fruits: " . implode(", ", $fruits) . "<br>";
+
+// Check if value exists
+if(in_array("Apple", $fruits)) {
+    echo "Apple exists in the array!<br>";
+}
+
+// Get array keys
+$keys = array_keys($student);
+echo "Array keys: " . implode(", ", $keys) . "<br>";
+
+// Merge arrays
+$array1 = [1, 2, 3];
+$array2 = [4, 5, 6];
+$merged = array_merge($array1, $array2);
+echo "Merged array: " . implode(", ", $merged) . "<br>";
+?>'
+
+
+
+
+
+
+
+
+
+
       }
     ];
 
