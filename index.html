@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Best of Luck - DBMS Practicals</title>
+  <title>Best of Luck - WDL Practicals</title>
   <style>
     * {
       margin: 0;
@@ -278,7 +278,6 @@
   </div>
 
   <script>
-    // Fixed and corrected programs array with all 12 practicals
     const programs = [
       {
         title: "Practical No : 1",
@@ -317,7 +316,6 @@
 
     <h1>Student Information</h1>
 
-    <!-- Image -->
     <img src="https://via.placeholder.com/200"
          alt="Sample Image"
          width="200"
@@ -325,25 +323,20 @@
 
     <br><br>
 
-    <!-- Hyperlink -->
     <a href="https://www.google.com" target="_blank">
         Visit Google
     </a>
 
     <br><br>
 
-    <!-- Main Table -->
     <table border="1" cellpadding="10">
-
         <tr>
             <th>Name</th>
             <th>Details</th>
         </tr>
-
         <tr>
             <td>John</td>
             <td>
-                <!-- Nested Table -->
                 <table border="1" cellpadding="5">
                     <tr>
                         <th>Subject</th>
@@ -360,7 +353,6 @@
                 </table>
             </td>
         </tr>
-
     </table>
 
 </body>
@@ -378,36 +370,28 @@
     <h1>Student Registration Form</h1>
 
     <form>
-
-        <!-- Name -->
         <label>Name:</label>
         <input type="text" name="name">
         
         <br><br>
 
-        <!-- Email -->
         <label>Email:</label>
         <input type="email" name="email">
 
         <br><br>
 
-        <!-- Gender -->
         <label>Gender:</label>
-
         <input type="radio" name="gender" value="Male"> Male
         <input type="radio" name="gender" value="Female"> Female
 
         <br><br>
 
-        <!-- Date of Birth -->
         <label>Date of Birth:</label>
         <input type="date" name="dob">
 
         <br><br>
 
-        <!-- Submit Button -->
         <input type="submit" value="Submit">
-
     </form>
 
 </body>
@@ -494,13 +478,11 @@
       <div class="row align-items-center">
         <div class="col-12 col-md-6">
           <h1 class="display-5 fw-bold">Build Responsive Layouts Easily</h1>
-          <p class="lead">
-            This page uses Bootstrap Grid and Components to adapt smoothly across screen sizes.
-          </p>
+          <p class="lead">This page uses Bootstrap Grid.</p>
           <a href="#" class="btn btn-primary btn-lg">Get Started</a>
         </div>
         <div class="col-12 col-md-6 mt-4 mt-md-0">
-          <img src="https://via.placeholder.com/600x400" class="img-fluid rounded" alt="Sample image">
+          <img src="https://via.placeholder.com/600x400" class="img-fluid rounded" alt="Sample">
         </div>
       </div>
     </div>
@@ -513,7 +495,7 @@
           <div class="card h-100 shadow-sm">
             <div class="card-body text-center">
               <h5 class="card-title">Fast</h5>
-              <p class="card-text">Built with Bootstrap utilities and ready-made components.</p>
+              <p class="card-text">Bootstrap utilities.</p>
               <a href="#" class="btn btn-outline-primary">Learn More</a>
             </div>
           </div>
@@ -522,7 +504,7 @@
           <div class="card h-100 shadow-sm">
             <div class="card-body text-center">
               <h5 class="card-title">Responsive</h5>
-              <p class="card-text">Columns stack on mobile and expand on larger screens.</p>
+              <p class="card-text">Columns stack on mobile.</p>
               <a href="#" class="btn btn-outline-primary">Learn More</a>
             </div>
           </div>
@@ -531,7 +513,7 @@
           <div class="card h-100 shadow-sm">
             <div class="card-body text-center">
               <h5 class="card-title">Clean</h5>
-              <p class="card-text">A simple structure that is easy to customize.</p>
+              <p class="card-text">Easy to customize.</p>
               <a href="#" class="btn btn-outline-primary">Learn More</a>
             </div>
           </div>
@@ -550,15 +532,15 @@
               <form>
                 <div class="mb-3">
                   <label for="name" class="form-label">Name</label>
-                  <input type="text" class="form-control" id="name" placeholder="Enter your name">
+                  <input type="text" class="form-control" id="name" placeholder="Your name">
                 </div>
                 <div class="mb-3">
                   <label for="email" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                  <input type="email" class="form-control" id="email" placeholder="Your email">
                 </div>
                 <div class="mb-3">
                   <label for="message" class="form-label">Message</label>
-                  <textarea class="form-control" id="message" rows="4" placeholder="Write your message"></textarea>
+                  <textarea class="form-control" id="message" rows="4" placeholder="Your message"></textarea>
                 </div>
                 <button type="submit" class="btn btn-success">Submit</button>
               </form>
@@ -589,38 +571,28 @@
   </style>
 </head>
 <body>
-
   <form id="myForm" onsubmit="return validateForm()">
     <h2>Contact Form</h2>
-
     <label for="name">Name</label>
     <input type="text" id="name" />
     <div id="nameError" class="error"></div>
-
     <label for="email">Email</label>
     <input type="email" id="email" />
     <div id="emailError" class="error"></div>
-
     <button type="submit">Submit</button>
   </form>
-
   <script>
     function validateForm() {
       let valid = true;
-
       const name = document.getElementById("name").value.trim();
       const email = document.getElementById("email").value.trim();
-
       document.getElementById("nameError").textContent = "";
       document.getElementById("emailError").textContent = "";
-
       const emailPattern = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
-
       if (name === "") {
         document.getElementById("nameError").textContent = "Name cannot be empty.";
         valid = false;
       }
-
       if (email === "") {
         document.getElementById("emailError").textContent = "Email cannot be empty.";
         valid = false;
@@ -628,11 +600,9 @@
         document.getElementById("emailError").textContent = "Enter a valid email address.";
         valid = false;
       }
-
       return valid;
     }
   </script>
-
 </body>
 </html>`
       },
@@ -645,54 +615,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dynamic Content with DOM</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 40px;
-      background: #f4f4f4;
-    }
-    .box {
-      max-width: 500px;
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    button {
-      padding: 10px 15px;
-      margin-top: 10px;
-      cursor: pointer;
-    }
-    #message {
-      margin-top: 20px;
-      font-size: 18px;
-      color: #2c3e50;
-    }
+    body { font-family: Arial, sans-serif; margin: 40px; background: #f4f4f4; }
+    .box { max-width: 500px; background: white; padding: 20px; border-radius: 10px; }
+    button { padding: 10px 15px; margin-top: 10px; cursor: pointer; }
+    #message { margin-top: 20px; font-size: 18px; color: #2c3e50; }
   </style>
 </head>
 <body>
-
   <div class="box">
     <h2>Dynamic Content Example</h2>
     <button onclick="showMessage()">Show Message</button>
     <button onclick="addItem()">Add Item</button>
-
     <div id="message"></div>
     <ul id="list"></ul>
   </div>
-
   <script>
     function showMessage() {
-      document.getElementById("message").textContent =
-        "Hello! This content was added dynamically using JavaScript DOM.";
+      document.getElementById("message").textContent = "Hello! This content was added dynamically using JavaScript DOM.";
     }
-
     function addItem() {
       const li = document.createElement("li");
       li.textContent = "New item added at " + new Date().toLocaleTimeString();
       document.getElementById("list").appendChild(li);
     }
   </script>
-
 </body>
 </html>`
       },
@@ -707,54 +653,25 @@
 </head>
 <body>
   <h2>Simple Calculator</h2>
-
   <script>
-    function add(a, b) {
-      return a + b;
-    }
-
-    function subtract(a, b) {
-      return a - b;
-    }
-
-    function multiply(a, b) {
-      return a * b;
-    }
-
-    function divide(a, b) {
-      if (b === 0) {
-        return "Cannot divide by zero";
-      }
-      return a / b;
-    }
-
+    function add(a, b) { return a + b; }
+    function subtract(a, b) { return a - b; }
+    function multiply(a, b) { return a * b; }
+    function divide(a, b) { if (b === 0) return "Cannot divide by zero"; return a / b; }
     function calculator() {
       const num1 = parseFloat(prompt("Enter first number:"));
       const operator = prompt("Enter operator (+, -, *, /):");
       const num2 = parseFloat(prompt("Enter second number:"));
-
       let result;
-
       switch (operator) {
-        case "+":
-          result = add(num1, num2);
-          break;
-        case "-":
-          result = subtract(num1, num2);
-          break;
-        case "*":
-          result = multiply(num1, num2);
-          break;
-        case "/":
-          result = divide(num1, num2);
-          break;
-        default:
-          result = "Invalid operator";
+        case "+": result = add(num1, num2); break;
+        case "-": result = subtract(num1, num2); break;
+        case "*": result = multiply(num1, num2); break;
+        case "/": result = divide(num1, num2); break;
+        default: result = "Invalid operator";
       }
-
       alert("Result: " + result);
     }
-
     calculator();
   </script>
 </body>
@@ -764,7 +681,6 @@
         title: "Practical No : 9",
         code: `<?php
 date_default_timezone_set("Asia/Kolkata");
-
 echo "Welcome<br>";
 echo "Current Date and Time: " . date("d-m-Y h:i:s A");
 ?>`
@@ -779,26 +695,21 @@ echo "Current Date and Time: " . date("d-m-Y h:i:s A");
   <title>PHP POST Form</title>
 </head>
 <body>
-
   <h2>Simple Form</h2>
-
   <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
     Name: <input type="text" name="name"><br><br>
     Email: <input type="email" name="email"><br><br>
     <input type="submit" name="submit" value="Submit">
   </form>
-
   <?php
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $name = htmlspecialchars($_POST["name"]);
       $email = htmlspecialchars($_POST["email"]);
-
       echo "<h3>Submitted Data:</h3>";
       echo "Name: " . $name . "<br>";
       echo "Email: " . $email . "<br>";
   }
   ?>
-
 </body>
 </html>`
       },
@@ -812,19 +723,14 @@ echo "Current Date and Time: " . date("d-m-Y h:i:s A");
   <title>String Manipulation</title>
 </head>
 <body>
-
   <h2>PHP String Manipulation</h2>
-
   <form method="post">
-    Enter String:
-    <input type="text" name="text">
+    Enter String: <input type="text" name="text">
     <input type="submit" value="Submit">
   </form>
-
   <?php
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $text = $_POST["text"];
-
       echo "<h3>Results:</h3>";
       echo "Original String: " . $text . "<br>";
       echo "Reversed String: " . strrev($text) . "<br>";
@@ -832,117 +738,67 @@ echo "Current Date and Time: " . date("d-m-Y h:i:s A");
       echo "Substring (first 5 characters): " . substr($text, 0, 5) . "<br>";
   }
   ?>
-
 </body>
 </html>`
       },
       {
         title: "Practical No : 12",
         code: `<?php
-// METHOD 1: Simple indexed array
+// METHOD 1: Indexed Array
 echo "<h2>Method 1: Indexed Array</h2>";
 $fruits = array("Apple", "Banana", "Orange", "Mango", "Grapes");
-
-echo "<pre>";
-print_r($fruits);
-echo "</pre>";
-
-echo "<pre>";
-var_dump($fruits);
-echo "</pre>";
-
-echo "<h3>Displaying using foreach loop:</h3>";
+echo "<pre>"; print_r($fruits); echo "</pre>";
 echo "<ul>";
-foreach($fruits as $fruit) {
-    echo "<li>$fruit</li>";
-}
+foreach($fruits as $fruit) { echo "<li>$fruit</li>"; }
 echo "</ul>";
 
-// METHOD 2: Associative array (key-value pairs)
+// METHOD 2: Associative Array
 echo "<h2>Method 2: Associative Array</h2>";
-$student = array(
-    "name" => "John Doe",
-    "age" => 20,
-    "course" => "Computer Science",
-    "grade" => "A"
-);
-
-echo "<pre>";
-print_r($student);
-echo "</pre>";
-
-echo "<h3>Student Details:</h3>";
+$student = array("name" => "John Doe", "age" => 20, "course" => "Computer Science", "grade" => "A");
+echo "<pre>"; print_r($student); echo "</pre>";
 echo "<table border='1'>";
 foreach($student as $key => $value) {
-    echo "<tr>";
-    echo "<th>$key</th>";
-    echo "<td>$value</td>";
-    echo "</tr>";
+    echo "<tr><th>$key</th><td>$value</td></tr>";
 }
 echo "</table>";
 
-// METHOD 3: Multidimensional array
+// METHOD 3: Multidimensional Array
 echo "<h2>Method 3: Multidimensional Array</h2>";
 $employees = array(
     array("name" => "Alice", "position" => "Manager", "salary" => 50000),
     array("name" => "Bob", "position" => "Developer", "salary" => 40000),
     array("name" => "Charlie", "position" => "Designer", "salary" => 35000)
 );
-
-echo "<h3>Employees Data:</h3>";
-echo "<table border='1' cellpadding='5'>";
-echo "<tr bgcolor='#ccc'><th>Name</th><th>Position</th><th>Salary</th></tr>";
+echo "<table border='1' cellpadding='5'><tr bgcolor='#ccc'><th>Name</th><th>Position</th><th>Salary</th></tr>";
 foreach($employees as $employee) {
-    echo "<tr>";
-    echo "<td>" . $employee['name'] . "</td>";
-    echo "<td>" . $employee['position'] . "</td>";
-    echo "<td>$" . number_format($employee['salary'], 2) . "</td>";
-    echo "</tr>";
+    echo "<tr><td>" . $employee['name'] . "</td><td>" . $employee['position'] . "</td><td>$" . number_format($employee['salary'], 2) . "</td></tr>";
 }
 echo "</table>";
 
-// METHOD 4: Storing values dynamically
+// METHOD 4: Dynamic Array Storage
 echo "<h2>Method 4: Dynamic Array Storage</h2>";
 $colors = array();
-
-$colors[] = "Red";
-$colors[] = "Green";
-$colors[] = "Blue";
+$colors[] = "Red"; $colors[] = "Green"; $colors[] = "Blue";
 array_push($colors, "Yellow", "Purple");
-
-echo "<h3>Colors:</h3>";
 echo "<select>";
-foreach($colors as $color) {
-    echo "<option value='$color'>$color</option>";
-}
+foreach($colors as $color) { echo "<option value='$color'>$color</option>"; }
 echo "</select>";
 
-// METHOD 5: Mixed data types
+// METHOD 5: Mixed Data Types
 echo "<h2>Method 5: Mixed Data Types</h2>";
 $mixed = array(10, "Hello", 3.14, true, array(1, 2, 3));
+echo "<pre>"; print_r($mixed); echo "</pre>";
 
-echo "<pre>";
-print_r($mixed);
-echo "</pre>";
-
-// Additional array operations
+// Additional Operations
 echo "<h2>Additional Array Operations</h2>";
-
 $numbers = [1, 2, 3, 4, 5];
 echo "Number of elements: " . count($numbers) . "<br>";
-
 sort($fruits);
 echo "Sorted fruits: " . implode(", ", $fruits) . "<br>";
-
-if(in_array("Apple", $fruits)) {
-    echo "Apple exists in the array!<br>";
-}
-
+if(in_array("Apple", $fruits)) { echo "Apple exists in the array!<br>"; }
 $keys = array_keys($student);
 echo "Array keys: " . implode(", ", $keys) . "<br>";
-
-$array1 = [1, 2, 3];
-$array2 = [4, 5, 6];
+$array1 = [1, 2, 3]; $array2 = [4, 5, 6];
 $merged = array_merge($array1, $array2);
 echo "Merged array: " . implode(", ", $merged) . "<br>";
 ?>`
@@ -953,11 +809,10 @@ echo "Merged array: " . implode(", ", $merged) . "<br>";
       return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     }
 
-    // Updated keywords for syntax highlighting (supports HTML/CSS/PHP/JS)
-    const keywords = /\b(CREATE|TABLE|PRIMARY|KEY|VARCHAR2|NUMBER|INSERT|INTO|VALUES|SELECT|FROM|WHERE|UPDATE|DELETE|SET|OR|REPLACE|TRIGGER|AFTER|ON|FOR|EACH|ROW|BEGIN|END|PROCEDURE|CURSOR|OPEN|LOOP|FETCH|EXIT|WHEN|CLOSE|FOREIGN|REFERENCES|JOIN|INNER|LEFT|RIGHT|VIEW|INDEX|SEQUENCE|SYNONYM|ALTER|ADD|MODIFY|DROP|COLUMN|RENAME|TRUNCATE|NOT|NULL|UNIQUE|CHECK|CONSTRAINT|IN|AS|IS|START|WITH|INCREMENT|BY|function|var|let|const|if|else|return|switch|case|break|echo|foreach|array|date_default_timezone_set|date|nav|section|div|span|form|input|table|tr|td|th)\b/gi;
+    const keywords = /\b(CREATE|TABLE|PRIMARY|KEY|VARCHAR2|NUMBER|INSERT|INTO|VALUES|SELECT|FROM|WHERE|UPDATE|DELETE|SET|OR|REPLACE|TRIGGER|AFTER|ON|FOR|EACH|ROW|BEGIN|END|PROCEDURE|CURSOR|OPEN|LOOP|FETCH|EXIT|WHEN|CLOSE|FOREIGN|REFERENCES|JOIN|INNER|LEFT|RIGHT|VIEW|INDEX|SEQUENCE|SYNONYM|ALTER|ADD|MODIFY|DROP|COLUMN|RENAME|TRUNCATE|NOT|NULL|UNIQUE|CHECK|CONSTRAINT|IN|AS|IS|START|WITH|INCREMENT|BY|function|var|let|const|if|else|return|switch|case|break|echo|foreach|array|date_default_timezone_set|date|nav|section|div|span|form|input|table|tr|td|th)\b/g;
     const types = /\b(Employee|Department|Emp_Log|Emp_View|Emp_Dept_View|Emp|DBMS_OUTPUT|AVG|MAX|String|Integer|Float|Boolean|Array)\b/g;
     const strRe = /("[^"]*"|'[^']*')/g;
-    const commentRe = /(\/\/.*$|\/\*[\s\S]*?\*\/)/gm;
+    const commentRe = /(\/\/.*$)/gm;
     const numberRe = /\b(\d+)\b/g;
 
     function highlightLine(line) {
