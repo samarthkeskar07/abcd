@@ -278,6 +278,7 @@
   </div>
 
   <script>
+    // Fixed and corrected programs array with all 12 practicals
     const programs = [
       {
         title: "Practical No : 1",
@@ -341,29 +342,23 @@
 
         <tr>
             <td>John</td>
-
             <td>
                 <!-- Nested Table -->
                 <table border="1" cellpadding="5">
-
                     <tr>
                         <th>Subject</th>
                         <th>Marks</th>
                     </tr>
-
                     <tr>
                         <td>HTML</td>
                         <td>85</td>
                     </tr>
-
                     <tr>
                         <td>CSS</td>
                         <td>90</td>
                     </tr>
-
                 </table>
             </td>
-
         </tr>
 
     </table>
@@ -420,76 +415,50 @@
       },
       {
         title: "Practical No : 4",
-        code: `HTML             <!DOCTYPE html>
+        code: `<!DOCTYPE html>
 <html>
 <head>
     <title>CSS Example</title>
-
-    <!-- Internal CSS -->
     <style>
         h1 {
             color: blue;
             text-align: center;
         }
-
         table {
             width: 50%;
             border-collapse: collapse;
         }
-
         th {
             background-color: lightgray;
         }
-
         th, td {
             border: 1px solid black;
             padding: 10px;
             text-align: center;
         }
     </style>
-
-    <!-- External CSS -->
     <link rel="stylesheet" href="style.css">
-
 </head>
 <body>
-
-    <!-- Inline CSS -->
     <h1 style="background-color: yellow;">
         Student Details
     </h1>
-
     <table>
-
         <tr>
             <th>Name</th>
             <th>Marks</th>
         </tr>
-
         <tr>
             <td>John</td>
             <td>85</td>
         </tr>
-
         <tr>
             <td>Sam</td>
             <td>90</td>
         </tr>
-
     </table>
-
 </body>
-</html>
-
-<style>
-...
-</style>
-
-<link rel="stylesheet" href="style.css">                         css                       body {
-    font-family: Arial;
-    background-color: lightblue;
-}style="background-color: yellow;"
-`
+</html>`
       },
       {
         title: "Practical No : 5",
@@ -503,14 +472,12 @@
 </head>
 <body>
 
-  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
       <a class="navbar-brand" href="#">MySite</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
         <span class="navbar-toggler-icon"></span>
       </button>
-
       <div class="collapse navbar-collapse" id="mainNav">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
@@ -522,7 +489,6 @@
     </div>
   </nav>
 
-  <!-- Hero -->
   <section class="bg-light py-5">
     <div class="container">
       <div class="row align-items-center">
@@ -540,7 +506,6 @@
     </div>
   </section>
 
-  <!-- Features -->
   <section class="py-5">
     <div class="container">
       <div class="row g-4">
@@ -553,7 +518,6 @@
             </div>
           </div>
         </div>
-
         <div class="col-12 col-md-4">
           <div class="card h-100 shadow-sm">
             <div class="card-body text-center">
@@ -563,7 +527,6 @@
             </div>
           </div>
         </div>
-
         <div class="col-12 col-md-4">
           <div class="card h-100 shadow-sm">
             <div class="card-body text-center">
@@ -577,7 +540,6 @@
     </div>
   </section>
 
-  <!-- Contact Form -->
   <section class="bg-light py-5">
     <div class="container">
       <div class="row justify-content-center">
@@ -609,12 +571,11 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>
-`
+</html>`
       },
       {
         title: "Practical No : 6",
-        code: `E<!DOCTYPE html>
+        code: `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -653,7 +614,7 @@
       document.getElementById("nameError").textContent = "";
       document.getElementById("emailError").textContent = "";
 
-      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const emailPattern = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
 
       if (name === "") {
         document.getElementById("nameError").textContent = "Name cannot be empty.";
@@ -734,8 +695,9 @@
 
 </body>
 </html>`
-
-title: "Practical No : 8",
+      },
+      {
+        title: "Practical No : 8",
         code: `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -799,14 +761,14 @@ title: "Practical No : 8",
 </html>`
       },
       {
-title: "Practical No : 9",
-        code:'<?php
+        title: "Practical No : 9",
+        code: `<?php
 date_default_timezone_set("Asia/Kolkata");
 
 echo "Welcome<br>";
 echo "Current Date and Time: " . date("d-m-Y h:i:s A");
-?>'
-},
+?>`
+      },
       {
         title: "Practical No : 10",
         code: `<!DOCTYPE html>
@@ -838,9 +800,8 @@ echo "Current Date and Time: " . date("d-m-Y h:i:s A");
   ?>
 
 </body>
-</html>'
-
-},
+</html>`
+      },
       {
         title: "Practical No : 11",
         code: `<!DOCTYPE html>
@@ -873,36 +834,29 @@ echo "Current Date and Time: " . date("d-m-Y h:i:s A");
   ?>
 
 </body>
-</html>'
-
-
-},
+</html>`
+      },
       {
         title: "Practical No : 12",
         code: `<?php
 // METHOD 1: Simple indexed array
 echo "<h2>Method 1: Indexed Array</h2>";
 $fruits = array("Apple", "Banana", "Orange", "Mango", "Grapes");
-// OR using short syntax: $fruits = ["Apple", "Banana", "Orange", "Mango", "Grapes"];
 
-// Display using print_r
 echo "<pre>";
 print_r($fruits);
 echo "</pre>";
 
-// Display using var_dump (shows data types)
 echo "<pre>";
 var_dump($fruits);
 echo "</pre>";
 
-// Display using foreach loop
 echo "<h3>Displaying using foreach loop:</h3>";
 echo "<ul>";
 foreach($fruits as $fruit) {
     echo "<li>$fruit</li>";
 }
 echo "</ul>";
-
 
 // METHOD 2: Associative array (key-value pairs)
 echo "<h2>Method 2: Associative Array</h2>";
@@ -927,7 +881,6 @@ foreach($student as $key => $value) {
 }
 echo "</table>";
 
-
 // METHOD 3: Multidimensional array
 echo "<h2>Method 3: Multidimensional Array</h2>";
 $employees = array(
@@ -948,12 +901,10 @@ foreach($employees as $employee) {
 }
 echo "</table>";
 
-
 // METHOD 4: Storing values dynamically
 echo "<h2>Method 4: Dynamic Array Storage</h2>";
-$colors = array(); // Empty array
+$colors = array();
 
-// Adding values
 $colors[] = "Red";
 $colors[] = "Green";
 $colors[] = "Blue";
@@ -966,8 +917,7 @@ foreach($colors as $color) {
 }
 echo "</select>";
 
-
-// METHOD 5: Array with different data types
+// METHOD 5: Mixed data types
 echo "<h2>Method 5: Mixed Data Types</h2>";
 $mixed = array(10, "Hello", 3.14, true, array(1, 2, 3));
 
@@ -975,43 +925,27 @@ echo "<pre>";
 print_r($mixed);
 echo "</pre>";
 
-
-// Additional useful array functions
+// Additional array operations
 echo "<h2>Additional Array Operations</h2>";
 
-// Count elements
 $numbers = [1, 2, 3, 4, 5];
 echo "Number of elements: " . count($numbers) . "<br>";
 
-// Sort array
 sort($fruits);
 echo "Sorted fruits: " . implode(", ", $fruits) . "<br>";
 
-// Check if value exists
 if(in_array("Apple", $fruits)) {
     echo "Apple exists in the array!<br>";
 }
 
-// Get array keys
 $keys = array_keys($student);
 echo "Array keys: " . implode(", ", $keys) . "<br>";
 
-// Merge arrays
 $array1 = [1, 2, 3];
 $array2 = [4, 5, 6];
 $merged = array_merge($array1, $array2);
 echo "Merged array: " . implode(", ", $merged) . "<br>";
-?>'
-
-
-
-
-
-
-
-
-
-
+?>`
       }
     ];
 
@@ -1019,10 +953,11 @@ echo "Merged array: " . implode(", ", $merged) . "<br>";
       return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     }
 
-    const keywords = /\b(CREATE|TABLE|PRIMARY|KEY|VARCHAR2|NUMBER|INSERT|INTO|VALUES|SELECT|FROM|WHERE|UPDATE|DELETE|SET|OR|REPLACE|TRIGGER|AFTER|ON|FOR|EACH|ROW|BEGIN|END|PROCEDURE|CURSOR|OPEN|LOOP|FETCH|EXIT|WHEN|CLOSE|FOREIGN|REFERENCES|JOIN|INNER|LEFT|RIGHT|VIEW|INDEX|SEQUENCE|SYNONYM|ALTER|ADD|MODIFY|DROP|COLUMN|RENAME|TRUNCATE|NOT|NULL|UNIQUE|CHECK|CONSTRAINT|IN|AS|IS|START|WITH|INCREMENT|BY)\b/g;
-    const types = /\b(Employee|Department|Emp_Log|Emp_View|Emp_Dept_View|Emp|DBMS_OUTPUT|AVG|MAX)\b/g;
+    // Updated keywords for syntax highlighting (supports HTML/CSS/PHP/JS)
+    const keywords = /\b(CREATE|TABLE|PRIMARY|KEY|VARCHAR2|NUMBER|INSERT|INTO|VALUES|SELECT|FROM|WHERE|UPDATE|DELETE|SET|OR|REPLACE|TRIGGER|AFTER|ON|FOR|EACH|ROW|BEGIN|END|PROCEDURE|CURSOR|OPEN|LOOP|FETCH|EXIT|WHEN|CLOSE|FOREIGN|REFERENCES|JOIN|INNER|LEFT|RIGHT|VIEW|INDEX|SEQUENCE|SYNONYM|ALTER|ADD|MODIFY|DROP|COLUMN|RENAME|TRUNCATE|NOT|NULL|UNIQUE|CHECK|CONSTRAINT|IN|AS|IS|START|WITH|INCREMENT|BY|function|var|let|const|if|else|return|switch|case|break|echo|foreach|array|date_default_timezone_set|date|nav|section|div|span|form|input|table|tr|td|th)\b/gi;
+    const types = /\b(Employee|Department|Emp_Log|Emp_View|Emp_Dept_View|Emp|DBMS_OUTPUT|AVG|MAX|String|Integer|Float|Boolean|Array)\b/g;
     const strRe = /("[^"]*"|'[^']*')/g;
-    const commentRe = /(\/\/.*$)/gm;
+    const commentRe = /(\/\/.*$|\/\*[\s\S]*?\*\/)/gm;
     const numberRe = /\b(\d+)\b/g;
 
     function highlightLine(line) {
@@ -1038,7 +973,9 @@ echo "Merged array: " . implode(", ", $merged) . "<br>";
     function makeLines(code) {
       const lines = code.split('\n');
       return lines.map(l => {
-        const has = keywords.test(l) || types.test(l);
+        const tempKw = new RegExp(keywords.source, 'gi');
+        const tempTypes = new RegExp(types.source, 'g');
+        const has = tempKw.test(l) || tempTypes.test(l);
         keywords.lastIndex = 0;
         types.lastIndex = 0;
         return `<div class="line${has ? ' has-keyword' : ''}">${highlightLine(l) || ' '}</div>`;
